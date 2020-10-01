@@ -13,15 +13,15 @@ public class Weapon {
   private final String name;
   private final int damage;
   private final int weight;
-  private final WeaponType type;
+  private final String type;
 
   /**
    * Creates a weapon with a name, a base damage, speed and it's type.
    *
-   * @see WeaponType
+   * @see Weapon subclases with the types
    */
   public Weapon(final String name, final int damage, final int weight,
-      final WeaponType type) {
+      final String type) {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
@@ -32,7 +32,7 @@ public class Weapon {
     return name;
   }
 
-  private int getDamage() {
+  public int getDamage() {
     return damage;
   }
 
@@ -40,9 +40,12 @@ public class Weapon {
     return weight;
   }
 
-  private WeaponType getType() {
+  public String getType() {
     return type;
   }
+
+  public int getMagicDamage(){return 0;}
+
 
   @Override
   public boolean equals(final Object o) {
@@ -56,7 +59,7 @@ public class Weapon {
     return getDamage() == weapon.getDamage() &&
         getWeight() == weapon.getWeight() &&
         getName().equals(weapon.getName()) &&
-        getType() == weapon.getType();
+        getType().equals(weapon.getType());
   }
 
   @Override

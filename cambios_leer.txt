@@ -13,5 +13,13 @@
 
 5. Crear clase magos, y mele para diferenciar los con mana y os que no 
 
-6. Separar las clases para los tipos de armas. 
+6. Separar las clases para los tipos de armas.
+
+7. Se agregaron los parametros healthpoints, maxhealth, defense y attack a la clase AbstractCharacter,
+   ademas de los metodos correspondientes para obtener estos valores, tanto en la interface
+   como su correcta aplicacion en la clase abstracta
+
+8. Se agrego metodos para cambiar los healthpoints, y attack y defense en AbstractCharacter, ademas de
+   un nuevo constructor por si se inicia sin estos parametros y los constructores respectivos en las
+   clases hijas.
  

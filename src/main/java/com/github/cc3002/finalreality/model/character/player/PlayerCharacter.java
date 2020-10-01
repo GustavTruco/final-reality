@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.AbstractCharacter;
+import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.Weapon;
 import java.util.Objects;
@@ -28,17 +29,17 @@ public class PlayerCharacter extends AbstractCharacter {
    * @param characterClass
    *     the class of this character
    */
-  private Weapon equippedWeapon = null;
+  protected Weapon equippedWeapon = null;
 
   public PlayerCharacter(@NotNull String name,
       @NotNull BlockingQueue<ICharacter> turnsQueue,
-      final CharacterClass characterClass) {
-    super(turnsQueue, name, characterClass);
+      final String characterClass, int healthpoints,int attack,int defense) {
+    super(turnsQueue, name, characterClass, healthpoints, attack, defense);
   }
-
-  public void equip(Weapon weapon) {
-    this.equippedWeapon = weapon;
-
+  public PlayerCharacter(@NotNull String name,
+                         @NotNull BlockingQueue<ICharacter> turnsQueue,
+                         final String characterClass){
+    super(turnsQueue,name,characterClass);
   }
 
   public Weapon getEquippedWeapon() {
@@ -48,6 +49,10 @@ public class PlayerCharacter extends AbstractCharacter {
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     scheduledExecutor.schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
+  }
+
+  public void attack(Enemy enemy) {
+    enemy.setHealthpoints(enemy.getHealthpoints()-this.getAttack());
   }
 
   @Override
@@ -64,7 +69,7 @@ public class PlayerCharacter extends AbstractCharacter {
       return false;
     }
     final PlayerCharacter that = (PlayerCharacter) o;
-    return getCharacterClass() == that.getCharacterClass()
+    return getCharacterClass().equals(that.getCharacterClass())
         && getName().equals(that.getName());
   }
 }

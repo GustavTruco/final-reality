@@ -1,6 +1,5 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
@@ -23,8 +22,14 @@ public class Enemy extends AbstractCharacter {
    */
   public Enemy(@NotNull final String name, final int weight,
       @NotNull final BlockingQueue<ICharacter> turnsQueue) {
-    super(turnsQueue, name, CharacterClass.ENEMY);
+    super(turnsQueue, name, "Enemy");
     this.weight = weight;
+  }
+  public Enemy(@NotNull final String name, final int weight,
+               @NotNull final BlockingQueue<ICharacter> turnsQueue,
+               int healthpoints,int attack, int defense) {
+    super(turnsQueue,name,"Enemy",healthpoints,attack,defense);
+    this.weight=weight;
   }
 
   /**

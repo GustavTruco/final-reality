@@ -1,6 +1,5 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import org.jetbrains.annotations.NotNull;
@@ -15,14 +14,44 @@ public abstract class AbstractCharacter implements ICharacter {
 
   protected final BlockingQueue<ICharacter> turnsQueue;
   protected final String name;
-  private final CharacterClass characterClass;
+  protected final String characterClass;
+  protected int maxHealth=0;
+  protected int healthPoints;
+  protected int attack=0;
+  protected int defense;
   protected ScheduledExecutorService scheduledExecutor;
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, CharacterClass characterClass) {
+      @NotNull String name, String characterClass, int healthpoints, int attack,int defense) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.characterClass = characterClass;
+    this.healthPoints=healthpoints;
+    this.maxHealth=healthpoints;
+    this.attack=attack;
+    this.defense=defense;
+  }
+
+  protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
+                              @NotNull String name, String characterClass){
+    this.turnsQueue = turnsQueue;
+    this.name = name;
+    this.characterClass = characterClass;
+  }
+
+  public void setAttack(int attack){
+    this.attack=attack;
+  }
+
+  public void setHealthpoints(int health){
+    if (this.maxHealth==0){
+      this.maxHealth=health;
+    }
+    this.healthPoints=health;
+  }
+
+  public void setDefense(int defense){
+    this.defense=defense;
   }
 
   /**
@@ -34,12 +63,32 @@ public abstract class AbstractCharacter implements ICharacter {
   }
 
   @Override
+  public int getMaxHealth() {
+    return maxHealth;
+  }
+
+  @Override
+  public int getHealthpoints() {
+    return healthPoints;
+  }
+
+  @Override
+  public int getAttack() {
+    return attack;
+  }
+
+  @Override
+  public int getDefense() {
+    return defense;
+  }
+
+  @Override
   public String getName() {
     return name;
   }
 
   @Override
-  public CharacterClass getCharacterClass() {
+  public String getCharacterClass() {
     return characterClass;
   }
 }

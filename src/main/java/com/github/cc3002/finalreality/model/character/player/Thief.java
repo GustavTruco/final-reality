@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 
 public class Thief extends PlayerCharacter{
-    private final String[] permittedWeapons ={"Sword","Staff","Bow"};
+    private final String[] permittedWeapons ={"Sword","Knife","Bow"};
 
     public Thief(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, int healthpoints, int attack, int defense) {
         super(name,turnsQueue, "Thief", healthpoints, attack, defense);

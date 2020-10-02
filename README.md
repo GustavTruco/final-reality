@@ -14,6 +14,7 @@ by [_Square Enix_](https://www.square-enix.com)
 Broadly speaking for the combat the player has a group of characters to control and a group of 
 enemies controlled by the computer.
 
----
+*The Thief class can equip, Swords, Knifes and Bows.
 
+----
 **The rest of the documentation is left for the users of this template to complete**

@@ -59,11 +59,11 @@ public class Weapon {
     return getDamage() == weapon.getDamage() &&
         getWeight() == weapon.getWeight() &&
         getName().equals(weapon.getName()) &&
-        getType().equals(weapon.getType());
+        getType().equals(weapon.getType()) && getMagicDamage()==weapon.getMagicDamage();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getDamage(), getWeight(), getType());
+    return Objects.hash(getName(), getDamage(), getWeight(), getType(),getMagicDamage());
   }
 }

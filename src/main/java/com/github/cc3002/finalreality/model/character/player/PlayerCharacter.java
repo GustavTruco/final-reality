@@ -70,6 +70,9 @@ public class PlayerCharacter extends AbstractCharacter {
     }
     final PlayerCharacter that = (PlayerCharacter) o;
     return getCharacterClass().equals(that.getCharacterClass())
-        && getName().equals(that.getName());
+        && getName().equals(that.getName()) &&
+            getHealthpoints() == that.getHealthpoints()&&
+            getAttack() == that.getAttack()&&
+            getDefense() == that.getDefense();
   }
 }

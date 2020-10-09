@@ -16,9 +16,9 @@ public abstract class AbstractCharacter implements ICharacter {
   protected final String name;
   protected final String characterClass;
   protected int maxHealth=0;
-  protected int healthPoints;
+  protected int healthPoints=0;
   protected int attack=0;
-  protected int defense;
+  protected int defense=0;
   protected ScheduledExecutorService scheduledExecutor;
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,

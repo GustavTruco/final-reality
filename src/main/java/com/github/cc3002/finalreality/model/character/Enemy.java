@@ -55,7 +55,10 @@ public class Enemy extends AbstractCharacter {
       return false;
     }
     final Enemy enemy = (Enemy) o;
-    return getWeight() == enemy.getWeight();
+    return getWeight() == enemy.getWeight() &&
+            getAttack()== enemy.getAttack() &&
+            getDefense() == enemy.getDefense() &&
+            getHealthpoints() == enemy.getHealthpoints();
   }
 
   @Override

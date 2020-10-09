@@ -16,7 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-public class BlackMageTest extends PlayerCharacterTest{
+public class BlackMageTest extends AbstractCharacterTest{
 
     protected List<BlackMage> testCharacters;
     protected BlockingQueue<ICharacter> turns;
@@ -29,7 +29,7 @@ public class BlackMageTest extends PlayerCharacterTest{
         turns= new LinkedBlockingQueue<>();
         testCharacters= new ArrayList<>();
         testCharacters.add(new BlackMage(BMAGE_NAME, turns));
-        testCharacters.add(new BlackMage(BMAGE_NAME,turns, 10,4,5,10));
+        testCharacters.add(new BlackMage(BMAGE_NAME,turns, 10,4,5,20));
         testWeapons = new ArrayList<>();
         testWeapons.add(new Knife("testKnife",20,10));
         testWeapons.add(new Staff("testStaff",15,10,5));
@@ -89,6 +89,53 @@ public class BlackMageTest extends PlayerCharacterTest{
         char1.equip(weap3);
         assertNotEquals(10,char1.getAttack());
         assertNotEquals(weap3,char1.getEquippedWeapon());
+    }
+
+    @Test
+    void magicAttackTest(){
+        var char1 = testCharacters.get(1);
+        char1.equip(testWeapons.get(1));
+        assertEquals(5,char1.getMagicAttack());
+        var enemy = new Enemy("Goblin",10, turns,20,10,10);
+        char1.magicAttack("Cure",enemy);
+        assertEquals(20,enemy.getHealthpoints());
+        assertEquals(20,char1.getMana());
+        char1.magicAttack("Thunder",enemy);
+        assertEquals(15,enemy.getHealthpoints());
+        assertEquals(5,char1.getMana());
+    }
+
+    @Test
+    void AttackTest(){
+        var char1=testCharacters.get(0);
+        var char2=testCharacters.get(1);
+        var enemy= new Enemy("Goblin",10,turns,50,10,10);
+        char1.equip(testWeapons.get(0));
+        char2.equip(testWeapons.get(0));
+        assertEquals(20,char1.getAttack());
+        assertEquals(20,char2.getAttack());
+        char1.attack(enemy);
+        assertEquals(30,enemy.getHealthpoints());
+        char2.attack(enemy);
+        assertEquals(10,enemy.getHealthpoints());
+    }
+
+    @Test
+    void SettersTest(){
+        var char1= testCharacters.get(0);
+        assertEquals(0,char1.getAttack());
+        assertEquals(0,char1.getDefense());
+        assertEquals(0,char1.getHealthpoints());
+        assertEquals(0,char1.getMaxHealth());
+        char1.setAttack(10);
+        assertEquals(10,char1.getAttack());
+        char1.setDefense(10);
+        assertEquals(10,char1.getDefense());
+        char1.setHealthpoints(10);
+        assertEquals(10,char1.getHealthpoints());
+        assertEquals(10,char1.getMaxHealth());
+        char1.setMaxHealth(20);
+        assertEquals(20,char1.getMaxHealth());
     }
 }
 

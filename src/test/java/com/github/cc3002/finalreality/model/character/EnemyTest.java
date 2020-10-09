@@ -6,10 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EnemyTest extends AbstractCharacterTest {
 
   private static final String ENEMY_NAME = "Goblin";
+  protected List<Enemy> testCharacters;
 
   @BeforeEach
   void setUp() {
@@ -61,5 +65,21 @@ class EnemyTest extends AbstractCharacterTest {
     }
   }
 
-
+  @Test
+  void SettersTest(){
+    var char1= testCharacters.get(0);
+    assertEquals(0,char1.getAttack());
+    assertEquals(0,char1.getDefense());
+    assertEquals(0,char1.getHealthpoints());
+    assertEquals(0,char1.getMaxHealth());
+    char1.setAttack(10);
+    assertEquals(10,char1.getAttack());
+    char1.setDefense(10);
+    assertEquals(10,char1.getDefense());
+    char1.setHealthpoints(10);
+    assertEquals(10,char1.getHealthpoints());
+    assertEquals(10,char1.getMaxHealth());
+    char1.setMaxHealth(20);
+    assertEquals(20,char1.getMaxHealth());
+  }
 }

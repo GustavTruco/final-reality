@@ -50,6 +50,8 @@ public abstract class AbstractCharacter implements ICharacter {
     this.healthPoints=health;
   }
 
+  public void setMaxHealth(int max_hp){ this.maxHealth=max_hp;}
+
   public void setDefense(int defense){
     this.defense=defense;
   }

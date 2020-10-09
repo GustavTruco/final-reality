@@ -19,7 +19,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class WhiteMageTest extends PlayerCharacterTest{
+public class WhiteMageTest extends AbstractCharacterTest{
 
     protected List<WhiteMage> testCharacters;
     protected BlockingQueue<ICharacter> turns;
@@ -87,5 +87,38 @@ public class WhiteMageTest extends PlayerCharacterTest{
         char1.equip(weap2);
         assertNotEquals(10,char1.getAttack());
         assertNotEquals(weap2,char1.getEquippedWeapon());
+    }
+
+    @Test
+    void AttackTest(){
+        var char1=testCharacters.get(0);
+        var char2=testCharacters.get(1);
+        var enemy= new Enemy("Goblin",10,turns,50,10,10);
+        char1.equip(testWeapons.get(0));
+        char2.equip(testWeapons.get(0));
+        assertEquals(15,char1.getAttack());
+        assertEquals(15,char2.getAttack());
+        char1.attack(enemy);
+        assertEquals(35,enemy.getHealthpoints());
+        char2.attack(enemy);
+        assertEquals(20,enemy.getHealthpoints());
+    }
+
+    @Test
+    void SettersTest(){
+        var char1= testCharacters.get(0);
+        assertEquals(0,char1.getAttack());
+        assertEquals(0,char1.getDefense());
+        assertEquals(0,char1.getHealthpoints());
+        assertEquals(0,char1.getMaxHealth());
+        char1.setAttack(10);
+        assertEquals(10,char1.getAttack());
+        char1.setDefense(10);
+        assertEquals(10,char1.getDefense());
+        char1.setHealthpoints(10);
+        assertEquals(10,char1.getHealthpoints());
+        assertEquals(10,char1.getMaxHealth());
+        char1.setMaxHealth(20);
+        assertEquals(20,char1.getMaxHealth());
     }
 }

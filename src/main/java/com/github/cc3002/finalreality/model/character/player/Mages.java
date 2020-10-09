@@ -27,4 +27,6 @@ public class Mages extends PlayerCharacter{
     }
 
     public void setMagicAttack(int magicAttack){this.magicAttack=magicAttack;}
+
+    public int getMagicAttack(){return this.magicAttack;}
 }

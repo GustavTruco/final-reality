@@ -37,4 +37,5 @@ public abstract class AbstractCharacterTest {
   protected void basicSetUp() {
     turns = new LinkedBlockingQueue<>();
   }
+
 }

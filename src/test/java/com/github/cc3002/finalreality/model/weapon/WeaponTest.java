@@ -46,6 +46,9 @@ class WeaponTest {
     var expectedKnife = new Knife(KNIFE_NAME, DAMAGE, SPEED);
 
     assertNotEquals(new Knight("test_knight",turns),testAxe);
+    assertNotEquals(testAxe,new Knight("test_knight",turns));
+
+    assertEquals(testAxe,testAxe);
     assertEquals(expectedAxe, testAxe);
     assertEquals(expectedAxe.hashCode(), testAxe.hashCode());
     assertEquals(expectedStaff, testStaff);

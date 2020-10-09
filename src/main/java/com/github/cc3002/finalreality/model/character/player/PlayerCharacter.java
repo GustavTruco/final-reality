@@ -57,7 +57,7 @@ public class PlayerCharacter extends AbstractCharacter {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getCharacterClass());
+    return Objects.hash(getCharacterClass(),getName(), getHealthpoints(), getAttack(), getDefense());
   }
 
   @Override

@@ -9,18 +9,50 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * A class that holds all the information of WhiteMages of the game.
+ * @author Gustavo Varas Santander
+ */
 public class WhiteMage extends Mages {
     private final String[] permittedWeapons ={"Staff"};
     private final Map<String, Integer> whiteMagic = Map.of("Cure",15, "Poisson", 40,"Paralysis",25);
 
+    /**
+     * Creates a new WhiteMage.
+     *
+     * @param name
+     *     the Mage's name.
+     * @param turnsQueue
+     *     the queue with the characters waiting for their turn.
+     * @param healthpoints
+     *     the health points of this Mage.
+     * @param attack
+     *     the attack of this Mage.
+     * @param defense
+     *     the defense of this Mage.
+     */
     public WhiteMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, int healthpoints, int attack, int defense, int mana) {
         super(name, turnsQueue,"WhiteMage", healthpoints, attack, defense,mana);
         this.mana=mana;
     }
+    /**
+     * Creates a new WhiteMage.
+     *
+     * @param name
+     *     the Mage's name.
+     * @param turnsQueue
+     *     the queue with the characters waiting for their turn.
+     */
     public WhiteMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue){
         super(name,turnsQueue,"WhiteMage");
     }
 
+    /**
+     * Equips the weapon if the type of weapon is in the list of permitted Weapons.
+     * If the weapon is equipped the attack attribute and magic attack attribute of the character change
+     * @param weapon
+     *       The weapon to be equipped.
+     */
     public void equip(Weapon weapon) {
         if (Arrays.asList(permittedWeapons).contains(weapon.getType())) {
             this.equippedWeapon = weapon;

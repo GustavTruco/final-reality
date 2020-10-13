@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.github.cc3002.finalreality.model.character</OriginalElement>
+  <nodes>
+    <node x="1292.25" y="575.0">com.github.cc3002.finalreality.model.character.Enemy</node>
+    <node x="1046.75" y="824.0">com.github.cc3002.finalreality.model.character.player.Engineer</node>
+    <node x="434.0" y="1029.0">com.github.cc3002.finalreality.model.character.player.WhiteMage</node>
+    <node x="659.75" y="824.0">com.github.cc3002.finalreality.model.character.player.Knight</node>
+    <node x="1447.75" y="824.0">com.github.cc3002.finalreality.model.character.player.Thief</node>
+    <node x="1184.25" y="0.0">com.github.cc3002.finalreality.model.character.ICharacter</node>
+    <node x="209.75" y="802.0">com.github.cc3002.finalreality.model.character.player.Mages</node>
+    <node x="1025.25" y="237.0">com.github.cc3002.finalreality.model.character.AbstractCharacter</node>
+    <node x="0.0" y="1018.0">com.github.cc3002.finalreality.model.character.player.BlackMage</node>
+    <node x="808.25" y="564.0">com.github.cc3002.finalreality.model.character.player.PlayerCharacter</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.github.cc3002.finalreality.model.character.player.Mages" target="com.github.cc3002.finalreality.model.character.player.PlayerCharacter">
+      <point x="0.0" y="-83.0" />
+      <point x="424.75" y="772.0" />
+      <point x="866.25" y="772.0" />
+      <point x="-174.0" y="94.0" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.character.player.WhiteMage" target="com.github.cc3002.finalreality.model.character.player.Mages">
+      <point x="0.0" y="-72.0" />
+      <point x="642.5" y="993.0" />
+      <point x="532.25" y="993.0" />
+      <point x="107.5" y="83.0" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.character.Enemy" target="com.github.cc3002.finalreality.model.character.AbstractCharacter">
+      <point x="0.0" y="-83.0" />
+      <point x="1487.25" y="539.0" />
+      <point x="1383.0" y="539.0" />
+      <point x="119.25" y="138.5" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.character.AbstractCharacter" target="com.github.cc3002.finalreality.model.character.ICharacter">
+      <point x="0.0" y="-138.5" />
+      <point x="0.0" y="93.5" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.character.player.Engineer" target="com.github.cc3002.finalreality.model.character.player.PlayerCharacter">
+      <point x="0.0" y="-61.0" />
+      <point x="1237.25" y="782.0" />
+      <point x="1098.25" y="782.0" />
+      <point x="58.0" y="94.0" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.character.player.BlackMage" target="com.github.cc3002.finalreality.model.character.player.Mages">
+      <point x="0.0" y="-83.0" />
+      <point x="207.0" y="993.0" />
+      <point x="317.25" y="993.0" />
+      <point x="-107.5" y="83.0" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.character.player.PlayerCharacter" target="com.github.cc3002.finalreality.model.character.AbstractCharacter">
+      <point x="0.0" y="-94.0" />
+      <point x="1040.25" y="539.0" />
+      <point x="1144.5" y="539.0" />
+      <point x="-119.25" y="138.5" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.character.player.Knight" target="com.github.cc3002.finalreality.model.character.player.PlayerCharacter">
+      <point x="0.0" y="-61.0" />
+      <point x="843.25" y="782.0" />
+      <point x="982.25" y="782.0" />
+      <point x="-58.0" y="94.0" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.character.player.Thief" target="com.github.cc3002.finalreality.model.character.player.PlayerCharacter">
+      <point x="0.0" y="-61.0" />
+      <point x="1627.25" y="772.0" />
+      <point x="1214.25" y="772.0" />
+      <point x="174.0" y="94.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.3995016611295681" x="903.5" y="592.0" />
+  <SelectedNodes>
+    <node>com.github.cc3002.finalreality.model.character.Enemy</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

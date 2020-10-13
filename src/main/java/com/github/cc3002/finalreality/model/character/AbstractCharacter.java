@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
  * An abstract class that holds the common behaviour of all the characters in the game.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Gustavo Varas Santander
  */
 public abstract class AbstractCharacter implements ICharacter {
 
@@ -39,9 +39,23 @@ public abstract class AbstractCharacter implements ICharacter {
     this.characterClass = characterClass;
   }
 
+  /**
+   * Sets the attack of the Character to the int given.
+   * @param attack
+   *      The number the attack attribute will be set.
+   */
+
   public void setAttack(int attack){
     this.attack=attack;
   }
+
+
+  /**
+   * Sets the Health Points of the Character to the int given if the Character has no Max Health, it's
+   * set it's to the given int.
+   * @param health
+   *      The number the health attribute will be set.
+   */
 
   public void setHealthpoints(int health){
     if (this.maxHealth==0){
@@ -50,7 +64,19 @@ public abstract class AbstractCharacter implements ICharacter {
     this.healthPoints=health;
   }
 
+  /**
+   * Sets the Max Health of the Character to the int given.
+   * @param max_hp
+   *     The number the max health will be set.
+   */
+
   public void setMaxHealth(int max_hp){ this.maxHealth=max_hp;}
+
+  /**
+   * Sets the Defense of the Character to the int given.
+   * @param defense
+   *     The number the defense attribute will be set.
+   */
 
   public void setDefense(int defense){
     this.defense=defense;
@@ -64,31 +90,50 @@ public abstract class AbstractCharacter implements ICharacter {
     scheduledExecutor.shutdown();
   }
 
+  /**
+   * Returns the Max Health of the Character.
+   */
   @Override
   public int getMaxHealth() {
     return maxHealth;
   }
 
+
+  /**
+   * Returns the Health Points of the Character.
+   */
   @Override
   public int getHealthpoints() {
     return healthPoints;
   }
 
+  /**
+   * Returns the Attack of the Character.
+   */
   @Override
   public int getAttack() {
     return attack;
   }
 
+  /**
+   * Returns the Defense of the Character.
+   */
   @Override
   public int getDefense() {
     return defense;
   }
 
+  /**
+   * Returns the Name of the Character.
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * Returns the Class of the Character.
+   */
   @Override
   public String getCharacterClass() {
     return characterClass;

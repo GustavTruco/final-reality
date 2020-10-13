@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
  * A class that holds all the information of a single enemy of the game.
  *
  * @author Ignacio Slater Muñoz
- * @author <Your name>
+ * @author Gustavo Varas
  */
 public class Enemy extends AbstractCharacter {
 
@@ -25,6 +25,10 @@ public class Enemy extends AbstractCharacter {
     super(turnsQueue, name, "Enemy");
     this.weight = weight;
   }
+  /**
+   * Creates a new enemy with a name, a weight, the queue with the characters ready to
+   * play, it's healthpoints, it's attack and it's defense.
+   */
   public Enemy(@NotNull final String name, final int weight,
                @NotNull final BlockingQueue<ICharacter> turnsQueue,
                int healthpoints,int attack, int defense) {
@@ -40,11 +44,23 @@ public class Enemy extends AbstractCharacter {
   }
 
 
+  /**
+   * The enemy waits it's turn based on it's weight.
+   */
+
   public void waitTurn() {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     var enemy = (Enemy) this;
     scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
   }
+
+
+
+  /**
+   * Sets a new equals method based on an enemy attributes.
+   * @param o
+   *      the object to be compare with
+   */
 
   @Override
   public boolean equals(final Object o) {
@@ -60,6 +76,10 @@ public class Enemy extends AbstractCharacter {
             getDefense() == enemy.getDefense() &&
             getHealthpoints() == enemy.getHealthpoints();
   }
+
+  /**
+   * Sets a new hashCode method based on an enemy attributes.
+   */
 
   @Override
   public int hashCode() {

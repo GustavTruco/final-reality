@@ -1,0 +1,25 @@
+1. Las listas de enumeracion hacen poco extensible el codigo, pero no se como
+   solucionarlo
+
+2. Se movio de ICharacter equip y getEquiped a la clase player, ya que los 
+   Enemy no se equipan armas
+
+3. Wait Turn se dividio para los enemy y player para hacer mas extensible el
+   Codigo
+
+4. La lista de Posibles clases de player, hay que realizar clases nuevas para
+   cada "tipo de clase" para poder implementar cosas como el mana y los 
+   distintos tipos de armas
+
+5. Crear clase magos, y mele para diferenciar los con mana y os que no 
+
+6. Separar las clases para los tipos de armas.
+
+7. Se agregaron los parametros healthpoints, maxhealth, defense y attack a la clase AbstractCharacter,
+   ademas de los metodos correspondientes para obtener estos valores, tanto en la interface
+   como su correcta aplicacion en la clase abstracta
+
+8. Se agrego metodos para cambiar los healthpoints, y attack y defense en AbstractCharacter, ademas de
+   un nuevo constructor por si se inicia sin estos parametros y los constructores respectivos en las
+   clases hijas.
+ 

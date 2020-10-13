@@ -1,15 +1,16 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import org.jetbrains.annotations.NotNull;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Executors;
 
 /**
  * A class that holds all the information of a single enemy of the game.
  *
  * @author Ignacio Slater Muñoz
- * @author <Your name>
+ * @author Gustavo Varas
  */
 public class Enemy extends AbstractCharacter {
 
@@ -21,8 +22,18 @@ public class Enemy extends AbstractCharacter {
    */
   public Enemy(@NotNull final String name, final int weight,
       @NotNull final BlockingQueue<ICharacter> turnsQueue) {
-    super(turnsQueue, name, CharacterClass.ENEMY);
+    super(turnsQueue, name, "Enemy");
     this.weight = weight;
+  }
+  /**
+   * Creates a new enemy with a name, a weight, the queue with the characters ready to
+   * play, it's healthpoints, it's attack and it's defense.
+   */
+  public Enemy(@NotNull final String name, final int weight,
+               @NotNull final BlockingQueue<ICharacter> turnsQueue,
+               int healthpoints,int attack, int defense) {
+    super(turnsQueue,name,"Enemy",healthpoints,attack,defense);
+    this.weight=weight;
   }
 
   /**
@@ -31,6 +42,25 @@ public class Enemy extends AbstractCharacter {
   public int getWeight() {
     return weight;
   }
+
+
+  /**
+   * The enemy waits it's turn based on it's weight.
+   */
+
+  public void waitTurn() {
+    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+    var enemy = (Enemy) this;
+    scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
+  }
+
+
+
+  /**
+   * Sets a new equals method based on an enemy attributes.
+   * @param o
+   *      the object to be compare with
+   */
 
   @Override
   public boolean equals(final Object o) {
@@ -41,8 +71,15 @@ public class Enemy extends AbstractCharacter {
       return false;
     }
     final Enemy enemy = (Enemy) o;
-    return getWeight() == enemy.getWeight();
+    return getWeight() == enemy.getWeight() &&
+            getAttack()== enemy.getAttack() &&
+            getDefense() == enemy.getDefense() &&
+            getHealthpoints() == enemy.getHealthpoints();
   }
+
+  /**
+   * Sets a new hashCode method based on an enemy attributes.
+   */
 
   @Override
   public int hashCode() {

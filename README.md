@@ -11,9 +11,17 @@ Context
 
 This project's goal is to create a (simplified) clone of _Final Fantasy_'s combat, a game developed
 by [_Square Enix_](https://www.square-enix.com)
-Broadly speaking for the combat the player has a group of characters to control and a group of 
+Broadly speaking for the combat the player has a group of characters to control, and a group of 
 enemies controlled by the computer.
 
----
+*The Thief class can equip, Swords, Knives and Bows.
 
+We have a lot of possible Classes for playable characters each of them has a list of permitted 
+weapons that can equip and if they are Mages they have mana to cast spells. In this model
+the enemy are characters too, but they cannot equip weapons of any kind.
+
+The turns are calculated in base of the weight of the characters, enemies have their own weight and
+playable character's weight is given by the weapon they have equipped. 
+
+----
 **The rest of the documentation is left for the users of this template to complete**

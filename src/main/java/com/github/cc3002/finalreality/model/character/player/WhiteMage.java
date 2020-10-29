@@ -1,6 +1,5 @@
 package com.github.cc3002.finalreality.model.character.player;
 
-import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.Weapon;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +13,6 @@ import java.util.concurrent.BlockingQueue;
  * @author Gustavo Varas Santander
  */
 public class WhiteMage extends Mages {
-    private final String[] permittedWeapons ={"Staff"};
     private final Map<String, Integer> whiteMagic = Map.of("Cure",15, "Poisson", 40,"Paralysis",25);
 
     /**
@@ -31,9 +29,9 @@ public class WhiteMage extends Mages {
      * @param defense
      *     the defense of this Mage.
      */
-    public WhiteMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, int healthpoints, int attack, int defense, int mana) {
-        super(name, turnsQueue,"WhiteMage", healthpoints, attack, defense,mana);
-        this.mana=mana;
+    public WhiteMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, int healthpoints,
+                     int attack, int defense, int mana, int magicAttack) {
+        super(name, turnsQueue,"WhiteMage", healthpoints, attack, defense,mana,magicAttack);
     }
     /**
      * Creates a new WhiteMage.
@@ -54,12 +52,9 @@ public class WhiteMage extends Mages {
      *       The weapon to be equipped.
      */
     public void equip(Weapon weapon) {
-        if (Arrays.asList(permittedWeapons).contains(weapon.getType())) {
-            this.equippedWeapon = weapon;
-            this.setAttack(equippedWeapon.getDamage());
-
-            if (weapon.getType().equals("Staff")){
-                this.setMagicAttack(weapon.getMagicDamage());
+        if (this.getHealthpoints()>0) {
+            if (weapon.equipToWhiteMage(this)!=null) {
+                this.equippedWeapon = weapon.equipToWhiteMage(this);
             }
         }
     }

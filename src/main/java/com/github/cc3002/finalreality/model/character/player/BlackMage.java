@@ -13,8 +13,6 @@ import java.util.*;
  * @author Gustavo Varas Santander
  */
 public class BlackMage extends Mages{
-
-    private final String[] permittedWeapons ={"Knife","Staff"};
     private final Map<String, Integer> blackMagic = Map.of("Thunder",15, "Fire", 15);
 
     /**
@@ -31,9 +29,9 @@ public class BlackMage extends Mages{
      * @param defense
      *     the defense of this Mage.
      */
-    public BlackMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, int healthpoints, int attack, int defense, int mana) {
-        super(name, turnsQueue,"BlackMage", healthpoints, attack, defense,mana);
-        this.mana=mana;
+    public BlackMage(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, int healthpoints,
+                     int attack, int defense, int mana,int magicAttack) {
+        super(name, turnsQueue,"BlackMage", healthpoints, attack, defense,mana,magicAttack);
     }
 
     /**
@@ -55,12 +53,9 @@ public class BlackMage extends Mages{
      *       The weapon to be equipped.
      */
     public void equip(Weapon weapon) {
-        if (Arrays.asList(permittedWeapons).contains(weapon.getType())) {
-            this.equippedWeapon = weapon;
-            this.setAttack(equippedWeapon.getDamage());
-
-            if (weapon.getType().equals("Staff")){
-                this.setMagicAttack(weapon.getMagicDamage());
+        if (this.getHealthpoints()>0) {
+            if (weapon.equipToBlackMage(this)!=null) {
+                this.equippedWeapon = weapon.equipToBlackMage(this);
             }
         }
     }

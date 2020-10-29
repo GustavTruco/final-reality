@@ -44,7 +44,7 @@ public abstract class AbstractCharacter implements ICharacter {
    * @param attack
    *      The number the attack attribute will be set.
    */
-
+  @Override
   public void setAttack(int attack){
     this.attack=attack;
   }
@@ -52,16 +52,18 @@ public abstract class AbstractCharacter implements ICharacter {
 
   /**
    * Sets the Health Points of the Character to the int given if the Character has no Max Health, it's
-   * set it's to the given int.
+   * set it's to the given int. If the int is negative the HP are set to zero.
    * @param health
    *      The number the health attribute will be set.
    */
-
+  @Override
   public void setHealthpoints(int health){
-    if (this.maxHealth==0){
-      this.maxHealth=health;
-    }
-    this.healthPoints=health;
+    if (health>0){
+      if (this.maxHealth==0){
+        this.maxHealth=health;
+      }
+      this.healthPoints=health;}
+    else { this.healthPoints=0;}
   }
 
   /**
@@ -69,7 +71,7 @@ public abstract class AbstractCharacter implements ICharacter {
    * @param max_hp
    *     The number the max health will be set.
    */
-
+  @Override
   public void setMaxHealth(int max_hp){ this.maxHealth=max_hp;}
 
   /**
@@ -77,7 +79,7 @@ public abstract class AbstractCharacter implements ICharacter {
    * @param defense
    *     The number the defense attribute will be set.
    */
-
+  @Override
   public void setDefense(int defense){
     this.defense=defense;
   }

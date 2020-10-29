@@ -1,5 +1,8 @@
 package com.github.cc3002.finalreality.model.weapon;
 
+import com.github.cc3002.finalreality.model.character.player.BlackMage;
+import com.github.cc3002.finalreality.model.character.player.WhiteMage;
+
 /**
  * A class that holds all the information of a Staff.
  *
@@ -33,4 +36,37 @@ public class Staff extends Weapon{
     public int getMagicDamage() {
         return magicDamage;
     }
+
+    /**
+     * Equips Staffs to Black Mage class players.
+     * Sets the attack of the character to the Staff damage,
+     * sets the magic attack of the character to the Staff magical damage.
+     * @param player
+     *        The player's Character that will be eventually equipped.
+     * @return this
+     *        Returns this weapon.
+     */
+    @Override
+    public Weapon equipToBlackMage(BlackMage player) {
+        player.setAttack(this.getDamage());
+        player.setMagicAttack(this.getMagicDamage());
+        return this;
+    }
+
+    /**
+     * Equips Staffs to White Mage class players.
+     * Sets the attack of the character to the Staff damage,
+     * sets the magic attack of the character to the Staff magical damage.
+     * @param player
+     *        The player's Character that will be eventually equipped.
+     * @return this
+     *        Returns this weapon.
+     */
+    @Override
+    public Weapon equipToWhiteMage(WhiteMage player) {
+        player.setAttack(this.getDamage());
+        player.setMagicAttack(this.getMagicDamage());
+        return this;
+    }
 }
+

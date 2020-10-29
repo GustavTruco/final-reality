@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  * @author Ignacio Slater Muñoz.
  * @author Gustavo Varas Santander
  */
-public class PlayerCharacter extends AbstractCharacter {
+public abstract class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter{
   protected Weapon equippedWeapon = null;
 
   /**
@@ -37,9 +37,9 @@ public class PlayerCharacter extends AbstractCharacter {
    *     the defense of this character
    */
 
-  public PlayerCharacter(@NotNull String name,
-      @NotNull BlockingQueue<ICharacter> turnsQueue,
-      final String characterClass, int healthpoints,int attack,int defense) {
+  public AbstractPlayerCharacter(@NotNull String name,
+                                 @NotNull BlockingQueue<ICharacter> turnsQueue,
+                                 final String characterClass, int healthpoints, int attack, int defense) {
     super(turnsQueue, name, characterClass, healthpoints, attack, defense);
   }
 
@@ -53,9 +53,9 @@ public class PlayerCharacter extends AbstractCharacter {
    * @param characterClass
    *     the class of this character
    */
-  public PlayerCharacter(@NotNull String name,
-                         @NotNull BlockingQueue<ICharacter> turnsQueue,
-                         final String characterClass){
+  public AbstractPlayerCharacter(@NotNull String name,
+                                 @NotNull BlockingQueue<ICharacter> turnsQueue,
+                                 final String characterClass){
     super(turnsQueue,name,characterClass);
   }
 
@@ -77,12 +77,15 @@ public class PlayerCharacter extends AbstractCharacter {
   }
 
   /**
-   * The character attacks an enemy reducing it's HP by the character attack.
+   * The character attacks an enemy reducing it's HP by the character attack minus the enemy defense.
    * @param enemy
    *     The enemy that will be attacked.
    */
   public void attack(Enemy enemy) {
-    enemy.setHealthpoints(enemy.getHealthpoints()-this.getAttack());
+    if (this.getHealthpoints()>0) {
+      if (this.getAttack() - enemy.getDefense()>0){
+      enemy.setHealthpoints(enemy.getHealthpoints() - this.getAttack() + enemy.getDefense());}
+    }
   }
 
   /**
@@ -103,10 +106,10 @@ public class PlayerCharacter extends AbstractCharacter {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof PlayerCharacter)) {
+    if (!(o instanceof AbstractPlayerCharacter)) {
       return false;
     }
-    final PlayerCharacter that = (PlayerCharacter) o;
+    final AbstractPlayerCharacter that = (AbstractPlayerCharacter) o;
     return getCharacterClass().equals(that.getCharacterClass())
         && getName().equals(that.getName()) &&
             getHealthpoints() == that.getHealthpoints()&&

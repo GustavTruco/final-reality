@@ -13,7 +13,7 @@ import java.util.concurrent.BlockingQueue;
  * @author Gustavo Varas Santander
  */
 
-public class Mages extends PlayerCharacter{
+public class Mages extends AbstractPlayerCharacter {
 
     protected int mana;
     protected int magicAttack=0;
@@ -35,9 +35,10 @@ public class Mages extends PlayerCharacter{
      *     the defense of this Mage
      */
     public Mages(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue,
-                    String characterClass, int healthpoints,int attack,int defense,int mana) {
+                    String characterClass, int healthpoints,int attack,int defense,int mana,int magicAttack) {
         super(name, turnsQueue, characterClass, healthpoints, attack, defense);
         this.mana=mana;
+        this.magicAttack=magicAttack;
     }
     /**
      * Creates a new Mage.

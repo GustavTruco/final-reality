@@ -2,6 +2,8 @@ package com.github.cc3002.finalreality.model.character;
 
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+
+import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.Executors;
@@ -52,6 +54,19 @@ public class Enemy extends AbstractCharacter {
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     var enemy = (Enemy) this;
     scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
+  }
+
+  /**
+   * The enemy attacks a player reducing it's HP by the character attack minus the player defense.
+   * This methods only works if the enemy is alive.
+   * @param player
+   *     The player that will be attacked.
+   */
+  public void attack(AbstractPlayerCharacter player) {
+    if (this.getHealthpoints()>0) {
+      if (this.getAttack() - player.getDefense()>0){
+        player.setHealthpoints(player.getHealthpoints() - this.getAttack() + player.getDefense());}
+    }
   }
 
 

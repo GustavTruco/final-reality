@@ -23,5 +23,7 @@ the enemy are characters too, but they cannot equip weapons of any kind.
 The turns are calculated in base of the weight of the characters, enemies have their own weight and
 playable character's weight is given by the weapon they have equipped. 
 
+There is no friendly fire, players can only attack enemies and enemies only attack players
+
 ----
 **The rest of the documentation is left for the users of this template to complete**

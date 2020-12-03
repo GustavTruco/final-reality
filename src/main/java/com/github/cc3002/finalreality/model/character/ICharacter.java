@@ -83,6 +83,12 @@ public interface ICharacter {
    */
 
   void setDefense(int defense);
+
+  /**
+   * Attacks another Character reducing its HP by this character attack minus the defender defense
+   */
+
+  void attack(ICharacter character);
 }
 
 

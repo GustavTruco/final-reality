@@ -15,4 +15,8 @@ public interface IPlayerCharacter {
      */
     Weapon getEquippedWeapon();
 
+    /**
+     * Equips a Weapon to the Character
+     */
+    void equip(Weapon weapon);
 }

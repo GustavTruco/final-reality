@@ -2,6 +2,8 @@ package com.github.cc3002.finalreality.model.character;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
+
+import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -139,5 +141,19 @@ public abstract class AbstractCharacter implements ICharacter {
   @Override
   public String getCharacterClass() {
     return characterClass;
+  }
+
+  /**
+   * The character attacks another character reducing it's HP by the character attack minus the player defense.
+   * This methods only works if the enemy is alive.
+   * @param character
+   *     The character that will be attacked.
+   */
+  @Override
+  public void attack(ICharacter character) {
+    if (this.getHealthpoints()>0) {
+      if (this.getAttack() - character.getDefense()>0){
+        character.setHealthpoints(character.getHealthpoints() - this.getAttack() +character.getDefense());}
+    }
   }
 }

@@ -12,7 +12,7 @@ import java.util.*;
  * A class that holds all the information of BlackMages of the game.
  * @author Gustavo Varas Santander
  */
-public class BlackMage extends Mages{
+public class BlackMage extends AbstractMages{
     private final Map<String, Integer> blackMagic = Map.of("Thunder",15, "Fire", 15);
 
     /**

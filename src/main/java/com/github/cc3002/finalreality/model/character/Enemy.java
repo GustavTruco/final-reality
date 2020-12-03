@@ -56,20 +56,6 @@ public class Enemy extends AbstractCharacter {
     scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
   }
 
-  /**
-   * The enemy attacks a player reducing it's HP by the character attack minus the player defense.
-   * This methods only works if the enemy is alive.
-   * @param player
-   *     The player that will be attacked.
-   */
-  public void attack(AbstractPlayerCharacter player) {
-    if (this.getHealthpoints()>0) {
-      if (this.getAttack() - player.getDefense()>0){
-        player.setHealthpoints(player.getHealthpoints() - this.getAttack() + player.getDefense());}
-    }
-  }
-
-
 
   /**
    * Sets a new equals method based on an enemy attributes.

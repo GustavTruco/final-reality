@@ -12,7 +12,7 @@ import java.util.concurrent.BlockingQueue;
  * A class that holds all the information of WhiteMages of the game.
  * @author Gustavo Varas Santander
  */
-public class WhiteMage extends Mages {
+public class WhiteMage extends AbstractMages {
     private final Map<String, Integer> whiteMagic = Map.of("Cure",15, "Poisson", 40,"Paralysis",25);
 
     /**

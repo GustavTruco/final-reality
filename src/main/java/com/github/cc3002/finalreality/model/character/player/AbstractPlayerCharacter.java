@@ -77,18 +77,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   /**
-   * The character attacks an enemy reducing it's HP by the character attack minus the enemy defense.
-   * @param enemy
-   *     The enemy that will be attacked.
-   */
-  public void attack(Enemy enemy) {
-    if (this.getHealthpoints()>0) {
-      if (this.getAttack() - enemy.getDefense()>0){
-      enemy.setHealthpoints(enemy.getHealthpoints() - this.getAttack() + enemy.getDefense());}
-    }
-  }
-
-  /**
    * Sets a new hashCode method based on a Player attributes.
    */
   @Override

@@ -13,7 +13,7 @@ import java.util.concurrent.BlockingQueue;
  * @author Gustavo Varas Santander
  */
 
-public class Mages extends AbstractPlayerCharacter {
+public abstract class AbstractMages extends AbstractPlayerCharacter {
 
     protected int mana;
     protected int magicAttack=0;
@@ -34,7 +34,7 @@ public class Mages extends AbstractPlayerCharacter {
      * @param defense
      *     the defense of this Mage
      */
-    public Mages(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue,
+    public AbstractMages(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue,
                     String characterClass, int healthpoints,int attack,int defense,int mana,int magicAttack) {
         super(name, turnsQueue, characterClass, healthpoints, attack, defense);
         this.mana=mana;
@@ -50,7 +50,7 @@ public class Mages extends AbstractPlayerCharacter {
      * @param characterClass
      *     the class of this Mage
      */
-    public Mages(@NotNull String name,@NotNull BlockingQueue<ICharacter> turnsQueue, final String characterClass){
+    public AbstractMages(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, final String characterClass){
         super(name,turnsQueue,characterClass);
     }
 
@@ -93,10 +93,10 @@ public class Mages extends AbstractPlayerCharacter {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Mages)) {
+        if (!(o instanceof AbstractMages)) {
             return false;
         }
-        final Mages that = (Mages) o;
+        final AbstractMages that = (AbstractMages) o;
         return getCharacterClass().equals(that.getCharacterClass())
                 && getName().equals(that.getName()) &&
                 getHealthpoints() == that.getHealthpoints() &&

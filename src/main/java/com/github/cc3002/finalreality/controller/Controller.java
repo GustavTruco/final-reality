@@ -382,10 +382,9 @@ public class Controller {
         if (oldWeapon!=null){
             if (!getCharacterWeapon(character).equals(oldWeapon)){
                 addToInventory(oldWeapon);
-                removeFromInventory(weapon);
             }
         }
-        else{
+        if (!getCharacterWeapon(character).equals(oldWeapon)) {
             removeFromInventory(weapon);
         }
     }

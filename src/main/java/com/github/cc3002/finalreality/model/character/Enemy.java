@@ -2,6 +2,8 @@ package com.github.cc3002.finalreality.model.character;
 
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+
+import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.Executors;
@@ -53,7 +55,6 @@ public class Enemy extends AbstractCharacter {
     var enemy = (Enemy) this;
     scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
   }
-
 
 
   /**

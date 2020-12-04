@@ -40,24 +40,42 @@ class WeaponTest {
   @Test
   void constructorTest() {
     var expectedAxe = new Axe(AXE_NAME, DAMAGE, SPEED);
+    var unexpectedAxe1= new Axe("test",DAMAGE,SPEED);
+    var unexpectedAxe2= new Axe(AXE_NAME,DAMAGE+1,SPEED);
+    var unexpectedAxe3= new Axe(AXE_NAME,DAMAGE,SPEED+1);
+    assertEquals(testAxe,testAxe);
+    assertEquals(expectedAxe, testAxe);
+    assertEquals(expectedAxe.hashCode(), testAxe.hashCode());
+    assertNotEquals(unexpectedAxe1,testAxe);
+    assertNotEquals(unexpectedAxe1.hashCode(),testAxe.hashCode());
+    assertNotEquals(unexpectedAxe2,testAxe);
+    assertNotEquals(unexpectedAxe2.hashCode(),testAxe.hashCode());
+    assertNotEquals(unexpectedAxe3,testAxe);
+    assertNotEquals(unexpectedAxe3.hashCode(),testAxe.hashCode());
+
     var expectedStaff = new Staff(STAFF_NAME, DAMAGE, SPEED, MAGIC_DAMAGE);
+    var unexpectedStaff1= new Staff(STAFF_NAME,DAMAGE,SPEED,MAGIC_DAMAGE+1);
+    assertEquals(expectedStaff, testStaff);
+    assertEquals(expectedStaff.hashCode(), testStaff.hashCode());
+    assertNotEquals(unexpectedStaff1,testStaff);
+    assertNotEquals(unexpectedStaff1.hashCode(),testStaff.hashCode());
+
     var expectedSword = new Sword(SWORD_NAME, DAMAGE, SPEED);
+    assertEquals(expectedSword, testSword);
+    assertEquals(expectedSword.hashCode(), testSword.hashCode());
+
     var expectedBow = new Bow(BOW_NAME, DAMAGE, SPEED);
+    assertEquals(expectedBow, testBow);
+    assertEquals(expectedBow.hashCode(), testBow.hashCode());
+
     var expectedKnife = new Knife(KNIFE_NAME, DAMAGE, SPEED);
+    assertEquals(expectedKnife, testKnife);
+    assertEquals(expectedKnife.hashCode(), testKnife.hashCode());
 
     assertNotEquals(new Knight("test_knight",turns),testAxe);
     assertNotEquals(testAxe,new Knight("test_knight",turns));
 
-    assertEquals(testAxe,testAxe);
-    assertEquals(expectedAxe, testAxe);
-    assertEquals(expectedAxe.hashCode(), testAxe.hashCode());
-    assertEquals(expectedStaff, testStaff);
-    assertEquals(expectedStaff.hashCode(), testStaff.hashCode());
-    assertEquals(expectedSword, testSword);
-    assertEquals(expectedSword.hashCode(), testSword.hashCode());
-    assertEquals(expectedBow, testBow);
-    assertEquals(expectedBow.hashCode(), testBow.hashCode());
-    assertEquals(expectedKnife, testKnife);
-    assertEquals(expectedKnife.hashCode(), testKnife.hashCode());
+    var trickyAxe= new Axe(SWORD_NAME,DAMAGE,SPEED);
+    assertNotEquals(trickyAxe,testSword);
   }
 }

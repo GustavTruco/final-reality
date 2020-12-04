@@ -1,5 +1,7 @@
 package com.github.cc3002.finalreality.model.weapon;
 
+import com.github.cc3002.finalreality.model.character.player.*;
+
 import java.util.Objects;
 
 /**
@@ -8,12 +10,8 @@ import java.util.Objects;
  * @author Ignacio Slater Muñoz.
  * @author Gustavo Varas Santander
  */
-public class Weapon {
+public class Weapon extends AbstractWeapon{
 
-  private final String name;
-  private final int damage;
-  private final int weight;
-  private final String type;
 
   /**
    * Creates a weapon with a name, a base damage, weight and it's type.
@@ -29,45 +27,68 @@ public class Weapon {
    */
   public Weapon(final String name, final int damage, final int weight,
       final String type) {
-    this.name = name;
-    this.damage = damage;
-    this.weight = weight;
-    this.type = type;
+    super(name,damage,weight,type);
   }
 
   /**
-   * Returns the Name of the Weapon.
+   *  Default values for equipToBlackMage.
+   * returns null for the weapon
+   * @param player
+   *        The player's Character that will be eventually equipped.
+   * @return null
+   *        Returns null as the default.
    */
-  public String getName() {
-    return name;
+  public Weapon equipToBlackMage(BlackMage player){
+    return null;
   }
 
   /**
-   * Returns the Damage of the Weapon.
+   *  Default values for equipToEngineer.
+   * returns null for the weapon
+   * @param player
+   *       The player's Character that will be eventually equipped.
+   * @return null
+   *        Returns null as the default.
    */
-  public int getDamage() {
-    return damage;
+  public Weapon equipToEngineer(Engineer player){
+    return null;
   }
 
   /**
-   * Returns the Weight of the Weapon.
+   * Default values for equipToKnight.
+   *returns null for the weapon
+   * @param player
+   *        The player's Character that will be eventually equipped.
+   * @return null
+   *        Returns null as the default.
    */
-  public int getWeight() {
-    return weight;
+  public Weapon equipToKnight(Knight player){
+    return null;
   }
 
   /**
-   * Returns the Type of the Weapon.
+   * Default values for equipToThief.
+   *returns null for the weapon
+   * @param player
+   *        The player's Character that will be eventually equipped.
+   * @return null
+   *        Returns null as the default.
    */
-  public String getType() {
-    return type;
+  public Weapon equipToThief(Thief player){
+    return null;
   }
 
   /**
-   * Returns 0 as the default value of Magic Damage.
+   * Default values for equipToWhiteMage.
+   *returns null for the weapon
+   * @param player
+   *        The player's Character that will be eventually equipped.
+   * @return null
+   *        Returns null as the default.
    */
-  public int getMagicDamage(){return 0;}
-
+  public Weapon equipToWhiteMage(WhiteMage player){
+    return null;
+  }
 
   /**
    * Sets a new equals method based on an enemy attributes.
@@ -86,7 +107,8 @@ public class Weapon {
     return getDamage() == weapon.getDamage() &&
         getWeight() == weapon.getWeight() &&
         getName().equals(weapon.getName()) &&
-        getType().equals(weapon.getType()) && getMagicDamage()==weapon.getMagicDamage();
+        getType().equals(weapon.getType()) &&
+            getMagicDamage()==weapon.getMagicDamage();
   }
 
   /**

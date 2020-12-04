@@ -4,16 +4,13 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.Weapon;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.concurrent.BlockingQueue;
 
 /**
  * A class that holds all the information of Engineers of the game.
  * @author Gustavo Varas Santander
  */
-public class Engineer extends PlayerCharacter{
-    private final String[] permittedWeapons ={"Axe","Bow"};
-
+public class Engineer extends AbstractPlayerCharacter {
     /**
      * Creates a new Engineer.
      *
@@ -51,9 +48,10 @@ public class Engineer extends PlayerCharacter{
      *       The weapon to be equipped.
      */
     public void equip(Weapon weapon) {
-        if (Arrays.asList(permittedWeapons).contains(weapon.getType())) {
-            this.equippedWeapon = weapon;
-            this.setAttack(equippedWeapon.getDamage());
+        if (this.getHealthpoints()>0) {
+            if (weapon.equipToEngineer(this)!=null) {
+                this.equippedWeapon = weapon.equipToEngineer(this);
+            }
         }
     }
 }

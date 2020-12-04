@@ -1,7 +1,11 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
+
+import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -20,6 +24,7 @@ public abstract class AbstractCharacter implements ICharacter {
   protected int attack=0;
   protected int defense=0;
   protected ScheduledExecutorService scheduledExecutor;
+  private final PropertyChangeSupport p= new PropertyChangeSupport(this);
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
       @NotNull String name, String characterClass, int healthpoints, int attack,int defense) {
@@ -44,7 +49,7 @@ public abstract class AbstractCharacter implements ICharacter {
    * @param attack
    *      The number the attack attribute will be set.
    */
-
+  @Override
   public void setAttack(int attack){
     this.attack=attack;
   }
@@ -52,16 +57,20 @@ public abstract class AbstractCharacter implements ICharacter {
 
   /**
    * Sets the Health Points of the Character to the int given if the Character has no Max Health, it's
-   * set it's to the given int.
+   * set it's to the given int. If the int is negative the HP are set to zero.
    * @param health
    *      The number the health attribute will be set.
    */
-
+  @Override
   public void setHealthpoints(int health){
-    if (this.maxHealth==0){
-      this.maxHealth=health;
-    }
-    this.healthPoints=health;
+    int oldValue=getHealthpoints();
+    if (health>0){
+      if (this.maxHealth==0){
+        this.maxHealth=health;
+      }
+      this.healthPoints=health;}
+    else { this.healthPoints=0;}
+    p.firePropertyChange("HealthPoints",oldValue,getHealthpoints());
   }
 
   /**
@@ -69,7 +78,7 @@ public abstract class AbstractCharacter implements ICharacter {
    * @param max_hp
    *     The number the max health will be set.
    */
-
+  @Override
   public void setMaxHealth(int max_hp){ this.maxHealth=max_hp;}
 
   /**
@@ -77,7 +86,7 @@ public abstract class AbstractCharacter implements ICharacter {
    * @param defense
    *     The number the defense attribute will be set.
    */
-
+  @Override
   public void setDefense(int defense){
     this.defense=defense;
   }
@@ -137,5 +146,27 @@ public abstract class AbstractCharacter implements ICharacter {
   @Override
   public String getCharacterClass() {
     return characterClass;
+  }
+
+  /**
+   * The character attacks another character reducing it's HP by the character attack minus the player defense.
+   * This methods only works if the enemy is alive.
+   * @param character
+   *     The character that will be attacked.
+   */
+  @Override
+  public void attack(ICharacter character) {
+    if (this.getHealthpoints()>0) {
+      if (this.getAttack() - character.getDefense()>0){
+        character.setHealthpoints(character.getHealthpoints() - this.getAttack() +character.getDefense());}
+    }
+  }
+
+  /**
+   * Add a new Listener to the PropertyChangeSupport
+   * @param listener
+   */
+  public void addListener(PropertyChangeListener listener){
+    p.addPropertyChangeListener(listener);
   }
 }

@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.Knight;
+import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.Thief;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,24 +28,28 @@ class EnemyTest extends AbstractCharacterTest {
   @Test
   void constructor1Test() {
     checkConstruction(new Enemy(ENEMY_NAME, 10, turns),
-        testCharacters.get(0),
-        new Enemy(ENEMY_NAME, 11, turns),
-        new PlayerCharacter(ENEMY_NAME, turns, "Thief"));
+            testCharacters.get(0),
+            new Enemy(ENEMY_NAME, 11, turns),
+            new Thief(ENEMY_NAME, turns));
   }
   @Test
   void constructor2Test() {
     checkConstruction(new Enemy(ENEMY_NAME, 10, turns,10,4,5),
             testCharacters.get(1),
             new Enemy(ENEMY_NAME, 11, turns,10,4,5),
-            new PlayerCharacter(ENEMY_NAME, turns, "Thief"));
+            new Thief(ENEMY_NAME, turns));
     checkConstruction(new Enemy(ENEMY_NAME, 10, turns,10,4,5),
             testCharacters.get(1),
             new Enemy(ENEMY_NAME, 10, turns,10,5,5),
-            new PlayerCharacter(ENEMY_NAME, turns, "Thief"));
+            new Thief(ENEMY_NAME, turns));
     checkConstruction(new Enemy(ENEMY_NAME, 10, turns,10,4,5),
             testCharacters.get(1),
             new Enemy(ENEMY_NAME, 10, turns,10,4,6),
-            new PlayerCharacter(ENEMY_NAME, turns, "Thief"));
+            new Thief(ENEMY_NAME, turns));
+    checkConstruction(new Enemy(ENEMY_NAME, 10, turns,10,4,5),
+            testCharacters.get(1),
+            new Enemy(ENEMY_NAME, 10, turns,11,4,5),
+            new Thief(ENEMY_NAME, turns));
 
   }
 
@@ -63,6 +69,21 @@ class EnemyTest extends AbstractCharacterTest {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  @Test
+  void AttackTest(){
+    var player=new Knight("Resgat",turns,50,10,1);
+    var enemy1=testCharacters.get(0);
+    var enemy2=testCharacters.get(1);
+    var enemy3=new Enemy(ENEMY_NAME,10,turns, 10,1,5);
+
+    enemy1.attack(player);
+    assertEquals(50,player.getHealthpoints());
+    enemy2.attack(player);
+    assertEquals(47,player.getHealthpoints());
+    enemy3.attack(player);
+    assertEquals(47,player.getHealthpoints());
   }
 
   @Test

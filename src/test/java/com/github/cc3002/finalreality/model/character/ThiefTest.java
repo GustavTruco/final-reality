@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ThiefTest extends AbstractCharacterTest{
     protected List<Thief> testCharacters;
@@ -42,8 +42,8 @@ public class ThiefTest extends AbstractCharacterTest{
     @Test
     void waitTurnTest() {
         Assertions.assertTrue(turns.isEmpty());
-        tryToEquip(testCharacters.get(0));
-        testCharacters.get(0).waitTurn();
+        tryToEquip(testCharacters.get(1));
+        testCharacters.get(1).waitTurn();
         try {
             // Thread.sleep is not accurate so this values may be changed to adjust the
             // acceptable error margin.
@@ -52,7 +52,7 @@ public class ThiefTest extends AbstractCharacterTest{
             Assertions.assertEquals(0, turns.size());
             Thread.sleep(200);
             Assertions.assertEquals(1, turns.size());
-            Assertions.assertEquals(testCharacters.get(0), turns.peek());
+            Assertions.assertEquals(testCharacters.get(1), turns.peek());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -68,46 +68,69 @@ public class ThiefTest extends AbstractCharacterTest{
 
     @Test
     void constructorTest() {
-        var enemy = new Enemy("Enemy", 10, turns);
         checkConstruction(new Thief(THIEF_NAME, turns),
                 testCharacters.get(0),
                 new Thief("Test", turns), new BlackMage(THIEF_NAME,turns));
+        checkConstruction(new Thief(THIEF_NAME, turns,10,4,5),
+                testCharacters.get(1),
+                new Thief(THIEF_NAME, turns,11,4,5),
+                new BlackMage(THIEF_NAME,turns,10,10,10,10,10));
+        checkConstruction(new Thief(THIEF_NAME, turns,10,4,5),
+                testCharacters.get(1),
+                new Thief(THIEF_NAME, turns,10,5,5),
+                new BlackMage(THIEF_NAME,turns,10,10,10,10,10));
+        checkConstruction(new Thief(THIEF_NAME, turns,10,4,5),
+                testCharacters.get(1),
+                new Thief(THIEF_NAME, turns,10,4,6),
+                new BlackMage(THIEF_NAME,turns,10,10,10,10,10));
     }
 
     @Test
     void equipWeaponTest() {
         var char1=testCharacters.get(0);
+        var char2=testCharacters.get(1);
         var weap1 = testWeapons.get(0);
         var weap2 = testWeapons.get(1);
         var weap3 = testWeapons.get(2);
-        var weap4 = testWeapons.get(3);
+        var weap4=testWeapons.get(3);
+
         char1.equip(weap1);
-        assertEquals(30,char1.getAttack());
-        assertEquals(weap1,char1.getEquippedWeapon());
+        char2.equip(weap1);
+        assertEquals(0,char1.getAttack());
+        assertEquals(30,char2.getAttack());
+        assertNull(char1.getEquippedWeapon());
+        assertEquals(weap1,char2.getEquippedWeapon());
+
         char1.equip(weap2);
-        assertEquals(20,char1.getAttack());
-        assertEquals(weap2,char1.getEquippedWeapon());
+        char2.equip(weap2);
+        assertEquals(0,char1.getAttack());
+        assertEquals(20,char2.getAttack());
+        assertNull(char1.getEquippedWeapon());
+        assertEquals(weap2,char2.getEquippedWeapon());
+
         char1.equip(weap3);
-        assertEquals(10,char1.getAttack());
-        assertEquals(weap3,char1.getEquippedWeapon());
+        char2.equip(weap3);
+        assertEquals(0,char1.getAttack());
+        assertEquals(10,char2.getAttack());
+        assertNull(char1.getEquippedWeapon());
+        assertEquals(weap3,char2.getEquippedWeapon());
+
         char1.equip(weap4);
-        assertNotEquals(15,char1.getAttack());
-        assertNotEquals(weap4,char1.getEquippedWeapon());
+        char2.equip(weap4);
+        assertEquals(0,char1.getAttack());
+        assertNotEquals(15,char2.getAttack());
+        assertNull(char1.getEquippedWeapon());
+        assertNotEquals(weap4,char2.getEquippedWeapon());
     }
 
     @Test
     void AttackTest(){
-        var char1=testCharacters.get(0);
         var char2=testCharacters.get(1);
         var enemy= new Enemy("Goblin",10,turns,70,10,10);
-        char1.equip(testWeapons.get(0));
         char2.equip(testWeapons.get(0));
-        assertEquals(30,char1.getAttack());
         assertEquals(30,char2.getAttack());
-        char1.attack(enemy);
-        assertEquals(40,enemy.getHealthpoints());
         char2.attack(enemy);
-        assertEquals(10,enemy.getHealthpoints());
+        assertEquals(50,enemy.getHealthpoints());
     }
 
     @Test
@@ -123,6 +146,8 @@ public class ThiefTest extends AbstractCharacterTest{
         assertEquals(10,char1.getDefense());
         char1.setHealthpoints(10);
         assertEquals(10,char1.getHealthpoints());
+        char1.setHealthpoints(-10);
+        assertEquals(0,char1.getHealthpoints());
         assertEquals(10,char1.getMaxHealth());
         char1.setMaxHealth(20);
         assertEquals(20,char1.getMaxHealth());

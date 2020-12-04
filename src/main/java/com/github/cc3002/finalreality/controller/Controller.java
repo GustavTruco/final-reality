@@ -431,7 +431,8 @@ public class Controller {
      * Reduces the number of living Enemies
      */
     public void enemyDied(){
-        livingEnemies=livingEnemies-1;
+        livingEnemies = livingEnemies - 1;
+
     }
 
     /**

@@ -63,12 +63,14 @@ public abstract class AbstractCharacter implements ICharacter {
    */
   @Override
   public void setHealthpoints(int health){
+    int oldValue=getHealthpoints();
     if (health>0){
       if (this.maxHealth==0){
         this.maxHealth=health;
       }
       this.healthPoints=health;}
     else { this.healthPoints=0;}
+    p.firePropertyChange("HealthPoints",oldValue,getHealthpoints());
   }
 
   /**

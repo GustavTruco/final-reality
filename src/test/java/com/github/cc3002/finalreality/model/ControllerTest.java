@@ -179,31 +179,48 @@ public class ControllerTest {
 
     @Test
     void TurnsTest() throws InterruptedException {
-        controller=new Controller(1,1);
-        controller.createKnight("TestKnight",50,0,0);
-        Knight ExpectedKnight= new Knight("TestKnight",turns,40,100,0);
-        Assertions.assertEquals(1,controller.getLivingPlayers());
+        controller = new Controller(1, 1);
+        Assertions.assertEquals("Neither", controller.checkWin());
+        controller.createKnight("TestKnight", 50, 0, 0);
+        Knight ExpectedKnight = new Knight("TestKnight", turns, 40, 100, 0);
+        Assertions.assertEquals(1, controller.getLivingPlayers());
 
-        controller.createEnemy("TestEnemy",10,10,10,10);
-        Enemy ExpectedEnemy= new Enemy("TestEnemy",10,turns,10,10,10);
-        Assertions.assertEquals(1,controller.getLivingEnemies());
+        controller.createEnemy("TestEnemy", 10, 10, 10, 10);
+        Enemy ExpectedEnemy = new Enemy("TestEnemy", 10, turns, 10, 10, 10);
+        Assertions.assertEquals(1, controller.getLivingEnemies());
 
-        controller.createSword("TestSword",100,20);
+        controller.createSword("TestSword", 100, 20);
         controller.equipWeaponToPlayer(controller.getInventory().get("TestSword"),
                 controller.getParty().get("TestKnight"));
-
 
         controller.startBattle();
         Thread.sleep(2100);
         controller.setActiveCharacter();
-        Assertions.assertEquals(ExpectedEnemy,controller.getActiveCharacter());
+        Assertions.assertEquals(ExpectedEnemy, controller.getActiveCharacter());
         controller.attack(controller.getActiveCharacter(), controller.getParty().get("TestKnight"));
-        Assertions.assertEquals("Neither",controller.checkWin());
+        Assertions.assertEquals("Neither", controller.checkWin());
         controller.setActiveCharacter();
-        Assertions.assertEquals(ExpectedKnight,controller.getActiveCharacter());
+        Assertions.assertEquals(ExpectedKnight, controller.getActiveCharacter());
         controller.attack(controller.getActiveCharacter(), controller.getEnemies().get("TestEnemy"));
-        Assertions.assertEquals(0,controller.getHealthPoints(controller.getEnemies().get("TestEnemy")));
+        Assertions.assertEquals(0, controller.getHealthPoints(controller.getEnemies().get("TestEnemy")));
+        Assertions.assertEquals("Player Wins", controller.checkWin());
 
+        controller=new Controller(1,1);
+        controller.createKnight("TestKnight",10,0,0);
 
+        controller.createEnemy("TestEnemy",20,10,10,10);
+
+        controller.createSword("TestSword",1,10);
+
+        controller.equipWeaponToPlayer(controller.getInventory().get("TestSword"),
+                controller.getParty().get("TestKnight"));
+
+        controller.startBattle();
+        Thread.sleep(2100);
+        controller.setActiveCharacter();
+        controller.attack(controller.getActiveCharacter(), controller.getEnemies().get("TestEnemy"));
+        controller.setActiveCharacter();
+        controller.attack(controller.getActiveCharacter(), controller.getParty().get("TestKnight"));
+        Assertions.assertEquals("Monsters Wins",controller.checkWin());
     }
 }

@@ -15,7 +15,7 @@ public class PlayerDeathHandler implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt){
-        if (((ICharacter) evt.getNewValue()).getHealthpoints() ==0) {
+        if (((int) evt.getNewValue()) ==0) {
             controller.playerDied();
         }
     }

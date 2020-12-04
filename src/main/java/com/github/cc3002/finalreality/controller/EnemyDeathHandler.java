@@ -15,9 +15,9 @@ public class EnemyDeathHandler implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt){
-        System.out.println(((Enemy) evt.getNewValue()).getHealthpoints());
-        if (((Enemy) evt.getNewValue()).getHealthpoints() ==0) {
+        if ((int) evt.getNewValue()==0){
             controller.enemyDied();
         }
+
     }
 }

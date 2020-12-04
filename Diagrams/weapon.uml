@@ -1,58 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>JAVA</ID>
-  <OriginalElement>com.github.cc3002.finalreality.model.weapon</OriginalElement>
+  <OriginalElement>com.github.cc3002.finalreality.model</OriginalElement>
   <nodes>
-    <node x="588.0" y="324.5">com.github.cc3002.finalreality.model.weapon.Bow</node>
-    <node x="371.50000000000006" y="0.0">com.github.cc3002.finalreality.model.weapon.Weapon</node>
-    <node x="771.0" y="324.5">com.github.cc3002.finalreality.model.weapon.Axe</node>
-    <node x="206.0" y="324.5">com.github.cc3002.finalreality.model.weapon.Sword</node>
-    <node x="401.0" y="324.5">com.github.cc3002.finalreality.model.weapon.Knife</node>
-    <node x="0.0" y="313.0">com.github.cc3002.finalreality.model.weapon.Staff</node>
+    <node x="644.0" y="303.0">com.github.cc3002.finalreality.model.weapon.AbstractWeapon</node>
+    <node x="884.0" y="742.5">com.github.cc3002.finalreality.model.weapon.Bow</node>
+    <node x="580.0" y="495.0">com.github.cc3002.finalreality.model.weapon.Weapon</node>
+    <node x="306.0" y="742.5">com.github.cc3002.finalreality.model.weapon.Axe</node>
+    <node x="1160.0" y="742.5">com.github.cc3002.finalreality.model.weapon.Sword</node>
+    <node x="578.5" y="0.0">com.github.cc3002.finalreality.model.weapon.IWeapon</node>
+    <node x="582.0" y="731.5">com.github.cc3002.finalreality.model.weapon.Knife</node>
+    <node x="0.0" y="731.0">com.github.cc3002.finalreality.model.weapon.Staff</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="com.github.cc3002.finalreality.model.weapon.Knife" target="com.github.cc3002.finalreality.model.weapon.Weapon">
-      <point x="41.75" y="-27.0" />
-      <point x="526.25" y="293.0" />
-      <point x="495.8" y="293.0" />
-      <point x="11.299999999999955" y="116.5" />
+    <edge source="com.github.cc3002.finalreality.model.weapon.Bow" target="com.github.cc3002.finalreality.model.weapon.Weapon">
+      <point x="0.0" y="-38.0" />
+      <point x="1012.0" y="711.0" />
+      <point x="780.1999999999999" y="711.0" />
+      <point x="57.19999999999993" y="93.0" />
     </edge>
     <edge source="com.github.cc3002.finalreality.model.weapon.Sword" target="com.github.cc3002.finalreality.model.weapon.Weapon">
-      <point x="43.75" y="-27.0" />
-      <point x="337.25" y="283.0" />
-      <point x="450.6" y="283.0" />
-      <point x="-33.900000000000034" y="116.5" />
+      <point x="0.0" y="-38.0" />
+      <point x="1274.5" y="701.0" />
+      <point x="837.4" y="701.0" />
+      <point x="114.39999999999998" y="93.0" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.weapon.Knife" target="com.github.cc3002.finalreality.model.weapon.Weapon">
+      <point x="0.0" y="-49.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.weapon.AbstractWeapon" target="com.github.cc3002.finalreality.model.weapon.IWeapon">
+      <point x="0.0" y="-71.0" />
+      <point x="0.0" y="126.5" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.model.weapon.Weapon" target="com.github.cc3002.finalreality.model.weapon.AbstractWeapon">
+      <point x="0.0" y="-93.0" />
+      <point x="0.0" y="71.0" />
     </edge>
     <edge source="com.github.cc3002.finalreality.model.weapon.Staff" target="com.github.cc3002.finalreality.model.weapon.Weapon">
-      <point x="-46.5" y="-38.5" />
-      <point x="46.5" y="253.0" />
-      <point x="382.80000000000007" y="253.0" />
-      <point x="-101.69999999999999" y="116.5" />
+      <point x="0.0" y="-49.5" />
+      <point x="143.0" y="701.0" />
+      <point x="608.6" y="701.0" />
+      <point x="-114.39999999999998" y="93.0" />
     </edge>
     <edge source="com.github.cc3002.finalreality.model.weapon.Axe" target="com.github.cc3002.finalreality.model.weapon.Weapon">
-      <point x="40.0" y="-27.0" />
-      <point x="891.0" y="253.0" />
-      <point x="586.2" y="253.0" />
-      <point x="101.69999999999993" y="116.5" />
-    </edge>
-    <edge source="com.github.cc3002.finalreality.model.weapon.Bow" target="com.github.cc3002.finalreality.model.weapon.Weapon">
-      <point x="40.75" y="-27.0" />
-      <point x="710.25" y="273.0" />
-      <point x="541.0" y="273.0" />
-      <point x="56.5" y="116.5" />
+      <point x="0.0" y="-38.0" />
+      <point x="434.0" y="711.0" />
+      <point x="665.8" y="711.0" />
+      <point x="-57.200000000000045" y="93.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.5478443743427971" x="465.49999999999994" y="195.0" />
+  <settings layout="Hierarchic Group" zoom="0.3804333972615717" x="756.2231241381076" y="442.50363497792415" />
   <SelectedNodes>
-    <node>com.github.cc3002.finalreality.model.weapon.Bow</node>
+    <node>com.github.cc3002.finalreality.model.weapon.AbstractWeapon</node>
   </SelectedNodes>
   <Categories>
-    <Category>Fields</Category>
-    <Category>Constructors</Category>
     <Category>Methods</Category>
     <Category>Properties</Category>
-    <Category>Inner Classes</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>

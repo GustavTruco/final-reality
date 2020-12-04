@@ -210,7 +210,7 @@ public class ControllerTest {
 
         controller.createEnemy("TestEnemy",20,10,10,10);
 
-        controller.createSword("TestSword",1,10);
+        controller.createSword("TestSword",11,10);
 
         controller.equipWeaponToPlayer(controller.getInventory().get("TestSword"),
                 controller.getParty().get("TestKnight"));

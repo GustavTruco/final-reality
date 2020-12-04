@@ -1,5 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -22,6 +24,7 @@ public abstract class AbstractCharacter implements ICharacter {
   protected int attack=0;
   protected int defense=0;
   protected ScheduledExecutorService scheduledExecutor;
+  private final PropertyChangeSupport p= new PropertyChangeSupport(this);
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
       @NotNull String name, String characterClass, int healthpoints, int attack,int defense) {
@@ -155,5 +158,13 @@ public abstract class AbstractCharacter implements ICharacter {
       if (this.getAttack() - character.getDefense()>0){
         character.setHealthpoints(character.getHealthpoints() - this.getAttack() +character.getDefense());}
     }
+  }
+
+  /**
+   * Add a new Listener to the PropertyChangeSupport
+   * @param listener
+   */
+  public void addListener(PropertyChangeListener listener){
+    p.addPropertyChangeListener(listener);
   }
 }

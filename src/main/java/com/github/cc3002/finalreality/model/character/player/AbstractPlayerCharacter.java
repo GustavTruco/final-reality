@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 public abstract class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter{
   protected Weapon equippedWeapon = null;
 
+
   /**
    * Creates a new character.
    *

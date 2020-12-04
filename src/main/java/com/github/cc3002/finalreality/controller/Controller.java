@@ -19,6 +19,9 @@ public class Controller {
     private int maxEnemiesNumber;
     private int livingPlayers;
     private int livingEnemies;
+    private final EnemyDeathHandler handler1= new EnemyDeathHandler(this);
+    private final PlayerDeathHandler handler2= new PlayerDeathHandler(this);
+    private ICharacter activeCharacter;
 
     /**
      * Creates a new Controller with a max number of Player Characters, and max number of Enemies
@@ -38,6 +41,34 @@ public class Controller {
         this.turns= new LinkedBlockingQueue<>();
 
     }
+
+    /**
+     * Checks if either the player or the game won
+     */
+    public String checkWin(){
+        if (livingEnemies==0 && livingPlayers!=0){
+            return "Player Wins";
+        }
+        if (livingEnemies!=0 && livingPlayers==0){
+            return "Monsters Wins";
+        }
+        return "Neither";
+    }
+
+    /**
+     * Returns the number of livingPlayers
+     */
+    public int getLivingPlayers(){
+        return livingPlayers;
+    }
+
+    /**
+     * Returns the number of livingEnemies
+     */
+    public int getLivingEnemies(){
+        return livingEnemies;
+    }
+
     /**
      * Creates a new BlackMage Character and adds it to the Party HashMap, it needs all the
      * parameters to create a BlackMage object.
@@ -59,8 +90,10 @@ public class Controller {
         if (playerParty.size()<maxPartyNumber){
             BlackMage blackMage=new BlackMage(name, turns,healthpoints, attack,
                     defense,mana,magicAttack);
+            blackMage.addListener(handler2);
             playerParty.put(name,blackMage);
             livingPlayers+=1;
+
         }
     }
 
@@ -85,6 +118,7 @@ public class Controller {
         if (playerParty.size()<maxPartyNumber){
             WhiteMage whiteMage=new WhiteMage(name, turns,healthpoints, attack,
                     defense,mana,magicAttack);
+            whiteMage.addListener(handler2);
             playerParty.put(name,whiteMage);
             livingPlayers+=1;
         }
@@ -106,6 +140,7 @@ public class Controller {
         if (playerParty.size()<maxPartyNumber){
             Engineer engineer =new Engineer(name, turns,healthpoints, attack,
                     defense);
+            engineer.addListener(handler2);
             playerParty.put(name,engineer);
             livingPlayers+=1;
         }
@@ -127,6 +162,7 @@ public class Controller {
         if (playerParty.size()<maxPartyNumber){
             Thief thief =new Thief(name, turns,healthpoints, attack,
                     defense);
+            thief.addListener(handler2);
             playerParty.put(name,thief);
             livingPlayers+=1;
         }
@@ -148,6 +184,7 @@ public class Controller {
         if (playerParty.size()<maxPartyNumber){
             Knight knight =new Knight(name, turns,healthpoints, attack,
                     defense);
+            knight.addListener(handler2);
             playerParty.put(name,knight);
             livingPlayers+=1;
         }
@@ -170,6 +207,7 @@ public class Controller {
     public void createEnemy(@NotNull final String name, final int weight, int healthpoints,int attack, int defense) {
         if (enemies.size()<maxEnemiesNumber) {
             Enemy enemy = new Enemy(name, weight, turns, healthpoints, attack, defense);
+            enemy.addListener(handler1);
             enemies.put(name, enemy);
             livingEnemies += 1;
         }
@@ -264,7 +302,7 @@ public class Controller {
      * @param character
      *       The Character from we will get the data
      */
-    public int getHp(ICharacter character){
+    public int getHealthPoints(ICharacter character){
         return character.getHealthpoints();
     }
 
@@ -390,7 +428,50 @@ public class Controller {
     }
 
     /**
-     * Implements the attack between Characters, the first will attack the second
+     * Reduces the number of living Enemies
+     */
+    public void enemyDied(){
+        livingEnemies=livingEnemies-1;
+    }
+
+    /**
+     * Reduces the number of living Players
+     */
+    public void playerDied(){
+        livingPlayers=livingPlayers-1;
+    }
+
+    /**
+     * Starts the battle adding all Characters to the turns Queue
+     */
+    public void startBattle(){
+        for (IPlayerCharacter character : playerParty.values()) {
+            character.waitTurn();
+        }
+        for (Enemy enemy : enemies.values()) {
+            enemy.waitTurn();
+        }
+    }
+
+    /**
+     * Pull the first object of the Turns Queue and set its as our active Character, this means it its turn
+     */
+
+    public void setActiveCharacter(){
+        activeCharacter=turns.poll();
+    }
+
+    /**
+     * Returns the active Character
+     */
+
+    public ICharacter getActiveCharacter(){
+        return activeCharacter;
+    }
+
+    /**
+     * Implements the attack between Characters, the first will attack the second,
+     * and starts the timer of the attacker Character to be added to the Turns Queue
      * @param attacker
      *       The Character that is attacking
      * @param defender
@@ -398,6 +479,7 @@ public class Controller {
      */
     public void attack(ICharacter attacker, ICharacter defender){
         attacker.attack(defender);
+        attacker.waitTurn();
     }
 
 }

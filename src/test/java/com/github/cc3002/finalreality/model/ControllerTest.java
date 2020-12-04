@@ -4,6 +4,7 @@ import com.github.cc3002.finalreality.controller.Controller;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.*;
+import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -67,6 +68,142 @@ public class ControllerTest {
 
         Enemy ExpectedEnemy1= new Enemy("TestGoblin1",10,turns,10,0,0);
         controller.createEnemy("TestGoblin1",10,10,0,0);
+        Assertions.assertEquals(1,controller.getEnemies().size());
+        Assertions.assertEquals(ExpectedEnemy1,controller.getEnemies().get("TestGoblin1"));
+
+        Enemy ExpectedEnemy2= new Enemy("TestGoblin2",10,turns,40,0,0);
+        controller.createEnemy("TestGoblin2",10,40,0,0);
+        Assertions.assertEquals(2,controller.getEnemies().size());
+        Assertions.assertEquals(ExpectedEnemy2,controller.getEnemies().get("TestGoblin2"));
+
+        Enemy ExpectedEnemy3= new Enemy("TestGoblin3",10,turns,20,0,0);
+        controller.createEnemy("TestGoblin3",10,20,0,0);
+        Assertions.assertEquals(3,controller.getEnemies().size());
+        Assertions.assertEquals(ExpectedEnemy3,controller.getEnemies().get("TestGoblin3"));
+
+        /*As we reached the limit of enemies if we try to create more, they should not be added to the list*/
+        controller.createEnemy("TestGoblin3",10,20,0,0);
+        Assertions.assertEquals(3,controller.getEnemies().size());
     }
 
+    @Test
+    void TestWeaponCreation(){
+        Assertions.assertEquals(0,controller.getInventory().size());
+
+        Axe ExpectedAxe= new Axe("TestAxe",10,10);
+        controller.createAxe("TestAxe",10,10);
+        Assertions.assertEquals(1,controller.getInventory().size());
+        Assertions.assertEquals(ExpectedAxe,controller.getInventory().get("TestAxe"));
+
+        Bow ExpectedBow= new Bow("TestBow",10,10);
+        controller.createBow("TestBow",10,10);
+        Assertions.assertEquals(2,controller.getInventory().size());
+        Assertions.assertEquals(ExpectedBow,controller.getInventory().get("TestBow"));
+
+        Sword ExpectedSword= new Sword("TestSword",10,10);
+        controller.createSword("TestSword",10,10);
+        Assertions.assertEquals(3,controller.getInventory().size());
+        Assertions.assertEquals(ExpectedSword,controller.getInventory().get("TestSword"));
+
+        Knife ExpectedKnife= new Knife("TestKnife",10,10);
+        controller.createKnife("TestKnife",10,10);
+        Assertions.assertEquals(4,controller.getInventory().size());
+        Assertions.assertEquals(ExpectedKnife,controller.getInventory().get("TestKnife"));
+
+        Staff ExpectedStaff= new Staff("TestStaff",10,10,10);
+        controller.createStaff("TestStaff",10,10,10);
+        Assertions.assertEquals(5,controller.getInventory().size());
+        Assertions.assertEquals(ExpectedStaff,controller.getInventory().get("TestStaff"));
+
+    }
+
+    @Test
+    void TestAttack() {
+        controller.createEnemy("TestEnemy", 10, 100, 10, 5);
+        controller.createKnight("TestKnight",100,5,2);
+        Assertions.assertEquals(100,controller.getHealthPoints(controller.getParty().get("TestKnight")));
+        controller.attack(controller.getEnemies().get("TestEnemy"),controller.getParty().get("TestKnight"));
+        Assertions.assertEquals(92,controller.getHealthPoints(controller.getParty().get("TestKnight")));
+
+    }
+
+    @Test
+    void TestEquip(){
+        controller.createKnight("TestKnight",100,0,10);
+        Assertions.assertNull(controller.getCharacterWeapon(controller.getParty().get("TestKnight")));
+
+        controller.createSword("TestSword1",100,10);
+        controller.createSword("TestSword2",50,10);
+        controller.createStaff("TestStaff",10,10,10);
+        Assertions.assertEquals(3,controller.getInventory().size());
+
+        Sword ExpectedSword1= new Sword("TestSword1",100,10);
+        Sword ExpectedSword2= new Sword("TestSword2",50,10);
+        Staff ExpectedStaff= new Staff("TestStaff",10,10,10);
+
+        controller.equipWeaponToPlayer(controller.getInventory().get("TestSword1"),
+                controller.getParty().get("TestKnight"));
+        Assertions.assertEquals(ExpectedSword1,controller.getCharacterWeapon(controller.getParty().get("TestKnight")));
+        Assertions.assertFalse(controller.getInventory().containsKey("TestSword1"));
+
+        controller.equipWeaponToPlayer(controller.getInventory().get("TestSword2"),
+                controller.getParty().get("TestKnight"));
+        Assertions.assertEquals(ExpectedSword2,controller.getCharacterWeapon(controller.getParty().get("TestKnight")));
+        Assertions.assertFalse(controller.getInventory().containsKey("TestSword2"));
+        Assertions.assertTrue(controller.getInventory().containsKey("TestSword1"));
+
+        controller.equipWeaponToPlayer(controller.getInventory().get("TestStaff"),
+                controller.getParty().get("TestKnight"));
+        Assertions.assertNotEquals(ExpectedStaff,controller.getCharacterWeapon(controller.getParty().get("TestKnight")));
+        Assertions.assertEquals(ExpectedSword2,controller.getCharacterWeapon(controller.getParty().get("TestKnight")));
+        Assertions.assertFalse(controller.getInventory().containsKey("TestSword2"));
+        Assertions.assertTrue(controller.getInventory().containsKey("TestStaff"));
+    }
+    @Test
+    void TestGetters(){
+        controller.createKnight("TestKnight",50,0,0);
+        controller.createEnemy("TestEnemy",10,10,10,10);
+
+        Assertions.assertEquals("TestKnight",controller.getName(controller.getParty().get("TestKnight")));
+        Assertions.assertEquals("TestEnemy",controller.getName(controller.getEnemies().get("TestEnemy")));
+
+        Assertions.assertEquals(0,controller.getAttack(controller.getParty().get("TestKnight")));
+        Assertions.assertEquals(10,controller.getAttack(controller.getEnemies().get("TestEnemy")));
+
+        Assertions.assertEquals(0,controller.getDefense(controller.getParty().get("TestKnight")));
+        Assertions.assertEquals(10,controller.getDefense(controller.getEnemies().get("TestEnemy")));
+
+        Assertions.assertEquals(10,controller.getEnemyWeight(controller.getEnemies().get("TestEnemy")));
+    }
+
+
+    @Test
+    void TurnsTest() throws InterruptedException {
+        controller=new Controller(1,1);
+        controller.createKnight("TestKnight",50,0,0);
+        Knight ExpectedKnight= new Knight("TestKnight",turns,40,100,0);
+        Assertions.assertEquals(1,controller.getLivingPlayers());
+
+        controller.createEnemy("TestEnemy",10,10,10,10);
+        Enemy ExpectedEnemy= new Enemy("TestEnemy",10,turns,10,10,10);
+        Assertions.assertEquals(1,controller.getLivingEnemies());
+
+        controller.createSword("TestSword",100,20);
+        controller.equipWeaponToPlayer(controller.getInventory().get("TestSword"),
+                controller.getParty().get("TestKnight"));
+
+
+        controller.startBattle();
+        Thread.sleep(2100);
+        controller.setActiveCharacter();
+        Assertions.assertEquals(ExpectedEnemy,controller.getActiveCharacter());
+        controller.attack(controller.getActiveCharacter(), controller.getParty().get("TestKnight"));
+        Assertions.assertEquals("Neither",controller.checkWin());
+        controller.setActiveCharacter();
+        Assertions.assertEquals(ExpectedKnight,controller.getActiveCharacter());
+        controller.attack(controller.getActiveCharacter(), controller.getEnemies().get("TestEnemy"));
+        Assertions.assertEquals(0,controller.getHealthPoints(controller.getEnemies().get("TestEnemy")));
+
+
+    }
 }

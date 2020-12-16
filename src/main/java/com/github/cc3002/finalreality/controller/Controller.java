@@ -22,6 +22,7 @@ public class Controller {
     private final EnemyDeathHandler handler1= new EnemyDeathHandler(this);
     private final PlayerDeathHandler handler2= new PlayerDeathHandler(this);
     private ICharacter activeCharacter;
+    private State state;
 
     /**
      * Creates a new Controller with a max number of Player Characters, and max number of Enemies
@@ -39,7 +40,7 @@ public class Controller {
         this.enemies= new HashMap<>();
         this.inventory= new HashMap<>();
         this.turns= new LinkedBlockingQueue<>();
-
+        this.setState(new WaitingCharacter());
     }
 
     /**
@@ -483,4 +484,57 @@ public class Controller {
         attacker.waitTurn();
     }
 
+    /**
+     * Set the current state of the game
+     */
+    public void setState(State aState){
+        this.state=aState;
+        state.setController(this);
+    }
+
+    /**
+     * Transitions to the next State if valid
+     */
+    void playTurn(){
+        state.playTurn();
+    }
+
+    /**
+     *Transitions to the next State if valid
+     */
+    void selectTarget(){
+        state.selectTarget();
+    }
+
+    /**
+     * Transitions to the next State if valid
+     */
+    void goToInventory(){
+        state.goToInventory();
+    }
+
+    /**
+     *Transitions to the next State if valid
+     */
+    void attacking(){
+        state.attacking();
+    }
+
+    /**
+     * Checks if the current State is WaitingCharacter
+     */
+    public boolean isWaiting(){return state.isWaiting();}
+
+    /**
+     * Checks if the current State is InTurn
+     */
+    public boolean isInTurn(){return state.isInTurn();}
+    /**
+     * Checks if the current State is SelectingTarget
+     */
+    public boolean isSelectingTarget(){return state.isSelectingTarget();}
+    /**
+     * Checks if the current State is Inventory
+     */
+    public boolean isInInventory(){return state.isInInventory();}
 }

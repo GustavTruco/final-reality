@@ -1,4 +1,4 @@
-package com.github.cc3002.finalreality.model;
+package com.github.cc3002.finalreality.controller;
 
 import com.github.cc3002.finalreality.controller.Controller;
 import com.github.cc3002.finalreality.model.character.Enemy;

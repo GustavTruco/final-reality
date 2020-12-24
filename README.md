@@ -11,8 +11,8 @@ Context
 
 This project's goal is to create a (simplified) clone of _Final Fantasy_'s combat, a game developed
 by [_Square Enix_](https://www.square-enix.com)
-Broadly speaking for the combat the player has a group of characters to control, and a group of 
-enemies controlled by the computer.
+Broadly speaking for the combat the player has a group of 4 characters to control, and a group of 
+enemies controlled by the computer, the maximum number of enemies can be chosen by the user.
 
 *The Thief class can equip, Swords, Knives and Bows.
 

@@ -86,6 +86,14 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   /**
+   *Returns false as objets that inherit this class are not enemies
+   */
+  @Override
+  public boolean isEnemy() {
+    return false;
+  }
+
+  /**
    * Sets a new equals method based on a Player attributes.
    * @param o
    *     The object with will be compared.

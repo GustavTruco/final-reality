@@ -1,10 +1,10 @@
 package com.github.cc3002.finalreality.controller;
 
-public class Inventory extends State {
+public class InventoryState extends State {
 
     @Override
     void playTurn(){
-        this.changeState(new InTurn());
+        this.changeState(new InTurnState());
     }
 
     @Override

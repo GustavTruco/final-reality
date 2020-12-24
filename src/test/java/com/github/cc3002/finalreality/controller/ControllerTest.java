@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.controller;
 
 import com.github.cc3002.finalreality.controller.Controller;
+import com.github.cc3002.finalreality.gui.FinalReality;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.*;
@@ -16,7 +17,7 @@ public class ControllerTest {
     protected BlockingQueue<ICharacter> turns;
     @BeforeEach
     void setUp(){
-        controller= new Controller(5,3);
+        controller= new Controller();
         turns=controller.getTurns();
     }
 
@@ -118,11 +119,14 @@ public class ControllerTest {
     }
 
     @Test
-    void TestAttack() {
+    void TestAttack() throws InterruptedException {
+        controller.startGame();
+        controller.playTurn();
+        controller.selectTarget();
         controller.createEnemy("TestEnemy", 10, 100, 10, 5);
         controller.createKnight("TestKnight",100,5,2);
         Assertions.assertEquals(100,controller.getHealthPoints(controller.getParty().get("TestKnight")));
-        controller.attack(controller.getEnemies().get("TestEnemy"),controller.getParty().get("TestKnight"));
+        controller.attack(controller.getEnemies().get("TestEnemy"),controller.getParty().get("TestKnight"),true);
         Assertions.assertEquals(92,controller.getHealthPoints(controller.getParty().get("TestKnight")));
 
     }
@@ -177,50 +181,4 @@ public class ControllerTest {
     }
 
 
-    @Test
-    void TurnsTest() throws InterruptedException {
-        controller = new Controller(1, 1);
-        Assertions.assertEquals("Neither", controller.checkWin());
-        controller.createKnight("TestKnight", 50, 0, 0);
-        Knight ExpectedKnight = new Knight("TestKnight", turns, 40, 100, 0);
-        Assertions.assertEquals(1, controller.getLivingPlayers());
-
-        controller.createEnemy("TestEnemy", 10, 10, 10, 10);
-        Enemy ExpectedEnemy = new Enemy("TestEnemy", 10, turns, 10, 10, 10);
-        Assertions.assertEquals(1, controller.getLivingEnemies());
-
-        controller.createSword("TestSword", 100, 20);
-        controller.equipWeaponToPlayer(controller.getInventory().get("TestSword"),
-                controller.getParty().get("TestKnight"));
-
-        controller.startBattle();
-        Thread.sleep(2100);
-        controller.setActiveCharacter();
-        Assertions.assertEquals(ExpectedEnemy, controller.getActiveCharacter());
-        controller.attack(controller.getActiveCharacter(), controller.getParty().get("TestKnight"));
-        Assertions.assertEquals("Neither", controller.checkWin());
-        controller.setActiveCharacter();
-        Assertions.assertEquals(ExpectedKnight, controller.getActiveCharacter());
-        controller.attack(controller.getActiveCharacter(), controller.getEnemies().get("TestEnemy"));
-        Assertions.assertEquals(0, controller.getHealthPoints(controller.getEnemies().get("TestEnemy")));
-        Assertions.assertEquals("Player Wins", controller.checkWin());
-
-        controller=new Controller(1,1);
-        controller.createKnight("TestKnight",10,0,0);
-
-        controller.createEnemy("TestEnemy",20,10,10,10);
-
-        controller.createSword("TestSword",11,10);
-
-        controller.equipWeaponToPlayer(controller.getInventory().get("TestSword"),
-                controller.getParty().get("TestKnight"));
-
-        controller.startBattle();
-        Thread.sleep(2100);
-        controller.setActiveCharacter();
-        controller.attack(controller.getActiveCharacter(), controller.getEnemies().get("TestEnemy"));
-        controller.setActiveCharacter();
-        controller.attack(controller.getActiveCharacter(), controller.getParty().get("TestKnight"));
-        Assertions.assertEquals("Monsters Wins",controller.checkWin());
-    }
 }

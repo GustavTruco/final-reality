@@ -1,14 +1,14 @@
 package com.github.cc3002.finalreality.controller;
 
-public class SelectTarget extends State {
+public class SelectTargetState extends State {
 
     @Override
     void playTurn(){
-        this.changeState(new InTurn());
+        this.changeState(new InTurnState());
     }
     @Override
     void attacking(){
-        this.changeState(new WaitingCharacter());
+        this.changeState(new WaitingCharacterState());
     }
 
     @Override

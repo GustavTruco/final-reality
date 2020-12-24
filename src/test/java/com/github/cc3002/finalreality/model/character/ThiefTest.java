@@ -136,6 +136,7 @@ public class ThiefTest extends AbstractCharacterTest{
     @Test
     void SettersTest(){
         var char1= testCharacters.get(0);
+        assertEquals(false,char1.isEnemy());
         assertEquals(0,char1.getAttack());
         assertEquals(0,char1.getDefense());
         assertEquals(0,char1.getHealthpoints());

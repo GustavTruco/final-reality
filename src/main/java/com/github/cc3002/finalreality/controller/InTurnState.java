@@ -1,15 +1,17 @@
 package com.github.cc3002.finalreality.controller;
 
-public class InTurn extends State {
+public class InTurnState extends State {
 
     @Override
     void selectTarget(){
-        this.changeState(new SelectTarget());
+        this.changeState(new SelectTargetState());
     }
+
     @Override
     void goToInventory(){
-        this.changeState(new Inventory());
+        this.changeState(new InventoryState());
     }
+
 
     @Override
     public boolean isInTurn() {

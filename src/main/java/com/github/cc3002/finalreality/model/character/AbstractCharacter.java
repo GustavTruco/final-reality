@@ -97,6 +97,7 @@ public abstract class AbstractCharacter implements ICharacter {
   protected void addToQueue() {
     turnsQueue.add(this);
     scheduledExecutor.shutdown();
+    p.firePropertyChange("InLine",false,true);
   }
 
   /**

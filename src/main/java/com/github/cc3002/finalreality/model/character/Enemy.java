@@ -56,6 +56,13 @@ public class Enemy extends AbstractCharacter {
     scheduledExecutor.schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
   }
 
+  /**
+   * Return true as objects are Enemies
+   */
+  @Override
+  public boolean isEnemy() {
+    return true;
+  }
 
   /**
    * Sets a new equals method based on an enemy attributes.

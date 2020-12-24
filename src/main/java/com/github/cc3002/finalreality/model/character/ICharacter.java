@@ -89,6 +89,12 @@ public interface ICharacter {
    */
 
   void attack(ICharacter character);
+
+  /**
+   * checks if Character is an Enemy
+   */
+
+  boolean isEnemy();
 }
 
 

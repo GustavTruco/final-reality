@@ -3,20 +3,73 @@
   <ID>JAVA</ID>
   <OriginalElement>com.github.cc3002.finalreality.controller</OriginalElement>
   <nodes>
-    <node x="27.0" y="1003.0">com.github.cc3002.finalreality.controller.PlayerDeathHandler</node>
-    <node x="0.0" y="127.0">com.github.cc3002.finalreality.controller.Controller</node>
-    <node x="27.0" y="0.0">com.github.cc3002.finalreality.controller.EnemyDeathHandler</node>
+    <node x="0.0" y="923.5">com.github.cc3002.finalreality.controller.PlayerDeathHandler</node>
+    <node x="831.4245227038184" y="2348.0">com.github.cc3002.finalreality.controller.ControllerTest</node>
+    <node x="644.0007997936018" y="0.0">com.github.cc3002.finalreality.controller.State</node>
+    <node x="638.9245227038183" y="476.0">com.github.cc3002.finalreality.controller.InventoryState</node>
+    <node x="861.9245227038183" y="923.5">com.github.cc3002.finalreality.controller.TurnInitHandler</node>
+    <node x="542.4859649122807" y="614.0">com.github.cc3002.finalreality.controller.InTurnState</node>
+    <node x="329.99999999999994" y="912.0">com.github.cc3002.finalreality.controller.ConfigState</node>
+    <node x="669.4245227038184" y="1099.0">com.github.cc3002.finalreality.controller.Controller</node>
+    <node x="1191.9245227038182" y="923.5">com.github.cc3002.finalreality.controller.EnemyDeathHandler</node>
+    <node x="436.92452270381824" y="465.0">com.github.cc3002.finalreality.controller.SelectTargetState</node>
+    <node x="472.13596491228077" y="763.0">com.github.cc3002.finalreality.controller.WaitingCharacterState</node>
+    <node x="334.5911893704849" y="625.0">com.github.cc3002.finalreality.controller.EndState</node>
+    <node x="638.4245227038184" y="2403.0">com.github.cc3002.finalreality.controller.StateTest</node>
   </nodes>
   <notes />
-  <edges />
-  <settings layout="Hierarchic Group" zoom="0.5936363636363636" x="182.0" y="540.0" />
+  <edges>
+    <edge source="com.github.cc3002.finalreality.controller.InventoryState" target="com.github.cc3002.finalreality.controller.State">
+      <point x="0.0" y="-38.5" />
+      <point x="717.9245227038183" y="445.0" />
+      <point x="729.5007997936018" y="445.0" />
+      <point x="-9.5" y="192.5" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.controller.WaitingCharacterState" target="com.github.cc3002.finalreality.controller.State">
+      <point x="79.5" y="-49.5" />
+      <point x="657.6359649122808" y="743.0" />
+      <point x="807.4245227038183" y="743.0" />
+      <point x="807.4245227038183" y="445.0" />
+      <point x="748.5007997936018" y="445.0" />
+      <point x="9.5" y="192.5" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.controller.EndState" target="com.github.cc3002.finalreality.controller.State">
+      <point x="0.0" y="-38.5" />
+      <point x="395.5911893704849" y="425.0" />
+      <point x="672.5007997936018" y="425.0" />
+      <point x="-66.5" y="192.5" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.controller.ConfigState" target="com.github.cc3002.finalreality.controller.State">
+      <point x="-49.33333333333337" y="-38.5" />
+      <point x="354.6666666666666" y="887.0" />
+      <point x="324.0911893704849" y="887.0" />
+      <point x="324.0911893704849" y="415.0" />
+      <point x="653.5007997936018" y="415.0" />
+      <point x="-85.5" y="192.5" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.controller.InTurnState" target="com.github.cc3002.finalreality.controller.State">
+      <point x="0.0" y="-49.5" />
+      <point x="626.4859649122807" y="589.0" />
+      <point x="628.4245227038183" y="589.0" />
+      <point x="628.4245227038183" y="445.0" />
+      <point x="710.5007997936018" y="445.0" />
+      <point x="-28.5" y="192.5" />
+    </edge>
+    <edge source="com.github.cc3002.finalreality.controller.SelectTargetState" target="com.github.cc3002.finalreality.controller.State">
+      <point x="0.0" y="-49.5" />
+      <point x="527.4245227038182" y="435.0" />
+      <point x="691.5007997936018" y="435.0" />
+      <point x="-47.5" y="192.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.24823805794831633" x="751.0" y="1267.0000000000002" />
   <SelectedNodes>
     <node>com.github.cc3002.finalreality.controller.PlayerDeathHandler</node>
   </SelectedNodes>
   <Categories>
-    <Category>Constructors</Category>
     <Category>Methods</Category>
     <Category>Properties</Category>
+    <Category>Inner Classes</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
